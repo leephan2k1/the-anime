@@ -1,0 +1,67 @@
+@import "../../assets/styles/_variable.scss";
+@import "../../assets/styles/mixin";
+
+.navBar {
+  height: 80px;
+  background-color: transparent;
+  overflow: hidden;
+  font-size: 2rem;
+  z-index: 11;
+  justify-content: space-around;
+  @include mobile {
+    justify-content: space-around !important;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+    z-index: -1;
+  }
+  .bi-list {
+    color: $icon-color;
+    font-size: 4rem;
+    display: none;
+    @include mobile {
+      display: block;
+    }
+  }
+  &__list {
+    display: flex;
+    width: 50%;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      font-size: 1.5rem;
+    }
+    li a {
+      color: #fff;
+      font-weight: 500;
+    }
+    .active {
+      border-bottom: 5px solid $icon-color;
+      border-radius: 10px;
+      padding: 5px;
+    }
+  }
+  &__logo {
+    font-family: SVN-Kashima Brush;
+    font-weight: bold;
+    color: $icon-color;
+    font-size: 4rem;
+  }
+  .user {
+    .bi-person-circle {
+      color: $icon-color;
+      font-size: 4rem;
+    }
+  }
+}
