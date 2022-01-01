@@ -1,4 +1,15 @@
-.sectionWrapper {
+@import "../../assets/styles/variable";
+
+.section {
+  margin-top: 3rem;
   height: 500px;
-  background-color: tomato;
+  // background-color: tomato;
+  &__title {
+    border-left: 4px solid $icon-color;
+    padding: 10px;
+    margin: 10px;
+    font-size: 2.5rem;
+    color: #fff;
+    text-transform: uppercase;
+  }
 }

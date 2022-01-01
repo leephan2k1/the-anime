@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="Anime-app d-flex flex-column">
       <NavBar />
+      {/* router here  */}
       <HomePage />
     </div>
   );

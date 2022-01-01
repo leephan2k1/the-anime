@@ -3,11 +3,12 @@
 
 .navBar {
   height: 80px;
-  background-color: transparent;
   overflow: hidden;
   font-size: 2rem;
   z-index: 500;
   justify-content: space-around;
+  position: fixed;
+  top: 0;
   @include mobile {
     justify-content: space-around !important;
   }

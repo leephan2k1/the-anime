@@ -27,34 +27,3 @@
   font-size: 5rem;
   color: #fff;
 }
-
-.Prev {
-  left: 31%;
-  @include desktop {
-    left: 39%;
-  }
-  @include tablet {
-    left: 32%;
-  }
-  @include mobile {
-    left: 29%;
-  }
-  @include mobileSmall {
-    left: 0%;
-  }
-}
-.Next {
-  left: 64%;
-  @include desktop {
-    left: 58%;
-  }
-  @include tablet {
-    left: 63%;
-  }
-  @include mobile {
-    left: 63%;
-  }
-  @include mobileSmall {
-    left: 87%;
-  }
-}

@@ -9,7 +9,7 @@ import { handleMainCarouselCSS } from "../../settings";
 import "./styles.scss";
 
 function Carousel(props) {
-  const { settings, carouselType } = props;
+  const { settings, carouselType, data } = props;
   const sliderRef = useRef(null);
 
   //Effect handle CSS for main Carousel
@@ -53,10 +53,12 @@ function Carousel(props) {
 Carousel.propTypes = {
   settings: PropTypes.object,
   carouselType: PropTypes.string,
+  data: PropTypes.array,
 };
 Carousel.defaultProps = {
   settings: {},
   carouselType: "",
+  data: [],
 };
 
 export default Carousel;

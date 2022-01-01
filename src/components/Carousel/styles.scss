@@ -12,30 +12,50 @@
     overflow: visible !important;
   }
 
-  // .controller {
-  //   height: 50px;
-  //   top: 20%;
-  //   z-index: 5;
-  //   @include desktop {
-  //     left: 38.6%;
-  //     width: 23%;
-  //     top: 10%;
-  //   }
-  //   @include tablet {
-  //     width: 36%;
-  //     top: 5%;
-  //     left: 32%;
-  //   }
-  //   @include mobile {
-  //     width: 40%;
-  //     left: 30%;
-  //     top: 5%;
-  //   }
-  //   @include mobileSmall {
-  //     width: 100%;
-  //     left: 0;
-  //   }
-  // }
+  .Prev {
+    left: 31%;
+    @include desktop {
+      left: 39%;
+    }
+    @include tablet {
+      left: 32%;
+    }
+    @include mobile {
+      left: 29%;
+    }
+    @include mobileSmall {
+      left: 0%;
+    }
+  }
+  .Next {
+    left: 64%;
+    @include desktop {
+      left: 58%;
+    }
+    @include tablet {
+      left: 63%;
+    }
+    @include mobile {
+      left: 63%;
+    }
+    @include mobileSmall {
+      left: 87%;
+    }
+  }
+}
+.carouselSection {
+  width: 100%;
+  max-width: 100%;
+  // background-color: tomato;
+  position: relative;
+  .Next {
+    right: 5%;
+    top: -20%;
+  }
+  .Prev {
+    right: 10%;
+    top: -20%;
+  }
 }
 .slick-prev,
 .slick-next {

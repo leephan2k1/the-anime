@@ -1,7 +1,7 @@
 @import "./assets/styles/_variable.scss";
 .Anime-app {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
   background-color: $background-color;
 }
