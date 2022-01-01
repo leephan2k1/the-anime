@@ -27,6 +27,23 @@ function Carousel(props) {
       {/* </div> */}
       <Slider {...settings} ref={sliderRef}>
         {/* at least 6 elements */}
+        {data &&
+          data.length > 0 &&
+          data.map((elem) => {
+            return (
+              <div
+                key={elem.anilist_id}
+                className="cardWrapper d-flex justify-content-center"
+              >
+                <Card
+                  imgSrc={elem.cover_image}
+                  episode_count={elem.episode_count}
+                  episode_duration={elem.episode_duration}
+                  id={elem.anilist_id}
+                />
+              </div>
+            );
+          })}
         <div className="cardWrapper d-flex justify-content-center">
           <Card />
         </div>
