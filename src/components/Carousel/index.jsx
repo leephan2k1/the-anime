@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import Card from "../Card";
-import ArrowButton from "../ArrowButton";
+import Button from "../Button";
 
 import { handleMainCarouselCSS } from "../../settings";
 
@@ -22,14 +22,8 @@ function Carousel(props) {
   return (
     <div className={carouselType}>
       {/* <div className="controller position-absolute d-flex justify-content-between"> */}
-      <ArrowButton
-        type={"Prev"}
-        sliderRef={() => sliderRef.current.slickPrev()}
-      />
-      <ArrowButton
-        type={"Next"}
-        sliderRef={() => sliderRef.current.slickNext()}
-      />
+      <Button type={"Prev"} handleEvent={() => sliderRef.current.slickPrev()} />
+      <Button type={"Next"} handleEvent={() => sliderRef.current.slickNext()} />
       {/* </div> */}
       <Slider {...settings} ref={sliderRef}>
         {/* at least 6 elements */}
