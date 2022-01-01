@@ -48,13 +48,33 @@
   max-width: 100%;
   // background-color: tomato;
   position: relative;
+  .Next,
+  .Prev {
+    top: -23%;
+    @include tablet {
+      top: -17%;
+    }
+    @include mobileSmall {
+      top: -27%;
+      width: 45px;
+      height: 45px;
+      font-size: 4rem;
+    }
+  }
   .Next {
     right: 5%;
-    top: -20%;
   }
   .Prev {
     right: 10%;
-    top: -20%;
+    @include tablet {
+      right: 13%;
+    }
+    @include mobile {
+      right: 16%;
+    }
+    @include mobileSmall {
+      right: 20%;
+    }
   }
 }
 .slick-prev,

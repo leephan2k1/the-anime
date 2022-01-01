@@ -1,4 +1,5 @@
 @import "../../assets/styles/variable";
+@import "../../assets/styles/mixin";
 
 .section {
   margin-top: 3rem;
@@ -6,10 +7,22 @@
   // background-color: tomato;
   &__title {
     border-left: 4px solid $icon-color;
+    width: fit-content;
     padding: 10px;
     margin: 10px;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #fff;
     text-transform: uppercase;
+    cursor: pointer;
+    &:hover {
+      color: $icon-color;
+    }
+    @include mobileSmall {
+      font-size: 1.4rem;
+    }
+    .fa-chevron-right {
+      margin-left: 7px;
+      font-size: 2rem;
+    }
   }
 }
