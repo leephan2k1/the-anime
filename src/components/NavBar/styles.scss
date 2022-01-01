@@ -6,7 +6,7 @@
   background-color: transparent;
   overflow: hidden;
   font-size: 2rem;
-  z-index: 11;
+  z-index: 500;
   justify-content: space-around;
   @include mobile {
     justify-content: space-around !important;

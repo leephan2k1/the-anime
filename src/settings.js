@@ -14,7 +14,7 @@ export const handleMainCarouselCSS = () => {
 
 export const mainCarouselSettings = {
   className: "center",
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 5,
