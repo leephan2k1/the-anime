@@ -8,10 +8,12 @@
   cursor: pointer;
   margin: 0 5px;
   transition: all 0.5s !important;
-
   // position: absolute !important;
   // top: -50px;
-
+  z-index: 1;
+  &__img {
+    object-fit: cover;
+  }
   &__episode {
     border: 1px solid tomato;
     background-color: tomato;
@@ -21,4 +23,14 @@
     color: #fff;
     font-size: 1.5rem;
   }
+}
+.overlay::before {
+  z-index: 20;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }

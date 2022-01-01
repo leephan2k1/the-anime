@@ -1,25 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import Card from "../Card";
+import ArrowButton from "../ArrowButton";
+
+import { handleMainCarouselCSS } from "../../settings";
 
 import "./styles.scss";
 
 function Carousel(props) {
   const { settings, carouselType } = props;
+  const sliderRef = useRef(null);
 
-  useEffect(() => {});
+  //Effect handle CSS for main Carousel
+  useEffect(() => {
+    if (carouselType === "carouselMain") {
+      handleMainCarouselCSS();
+    }
+  }, []);
+
   return (
     <div className={carouselType}>
-      <div className="controller position-absolute d-flex justify-content-between">
-        <div className="Prev d-flex justify-content-center align-items-center">
-          ‹
-        </div>
-        <div className="Next d-flex justify-content-center align-items-center">
-          ›
-        </div>
-      </div>
-      <Slider {...settings}>
+      {/* <div className="controller position-absolute d-flex justify-content-between"> */}
+      <ArrowButton
+        type={"Prev"}
+        sliderRef={() => sliderRef.current.slickPrev()}
+      />
+      <ArrowButton
+        type={"Next"}
+        sliderRef={() => sliderRef.current.slickNext()}
+      />
+      {/* </div> */}
+      <Slider {...settings} ref={sliderRef}>
+        {/* at least 6 elements */}
         <div className="cardWrapper d-flex justify-content-center">
           <Card />
         </div>
@@ -43,6 +56,13 @@ function Carousel(props) {
   );
 }
 
-Carousel.propTypes = {};
+Carousel.propTypes = {
+  settings: PropTypes.object,
+  carouselType: PropTypes.string,
+};
+Carousel.defaultProps = {
+  settings: {},
+  carouselType: "",
+};
 
 export default Carousel;
