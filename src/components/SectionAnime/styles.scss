@@ -15,7 +15,7 @@
     text-transform: uppercase;
     cursor: pointer;
     &:hover {
-      color: $icon-color;
+      color: $acive-color;
     }
     @include mobileSmall {
       font-size: 1.4rem;

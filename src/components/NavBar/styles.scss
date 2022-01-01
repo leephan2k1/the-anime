@@ -58,6 +58,9 @@
     font-weight: bold;
     color: $icon-color;
     font-size: 4rem;
+    &:hover {
+      color: $acive-color;
+    }
   }
   .user {
     .bi-person-circle {

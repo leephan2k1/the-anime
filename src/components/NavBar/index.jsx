@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "./styles.scss";
 
 export default function NavBar() {
@@ -27,23 +28,45 @@ export default function NavBar() {
 
   return (
     <nav className="navBar w-full d-flex align-items-center">
-      <div className="navBar__logo h-full d-flex justify-content-center align-items-center">
+      <NavLink
+        className="navBar__logo h-full d-flex justify-content-center align-items-center"
+        to="/"
+      >
         Anime Zone
-      </div>
+      </NavLink>
+
       <ul className="navBar__list justify-content-between align-items-center h-full">
         <li>
-          <a className="active" href="#">
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             Trang chủ
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#">Bảng xếp hạng</a>
+          <NavLink
+            to="/ranking"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Bảng xếp hạng
+          </NavLink>
         </li>
         <li>
-          <a href="#">Thể loại</a>
+          <NavLink
+            to="/category"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Thể loại
+          </NavLink>
         </li>
         <li>
-          <a href="#">Mới nhất</a>
+          <NavLink
+            to="/new"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Mới nhất
+          </NavLink>
         </li>
       </ul>
       <div className="navBar__right-wrapper d-flex justify-content-center align-items-center">
