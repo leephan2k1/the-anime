@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
+import { useSelector } from "react-redux";
+import { remainMiddleElem } from "../../app/selectors";
 
-//
+//https://s4.anilist.co/file/anilistcdn/media/anime/banner/128547-aVWJmZz9dwJJ.jpg
 export default function Header() {
+  const [urlBanner, setUrlBanner] = useState("");
+  const midElem = useSelector(remainMiddleElem);
+
+  useEffect(() => {
+    // console.log([midElem]);
+    if (midElem) {
+      setUrlBanner(midElem.banner_image);
+      // console.log(urlBanner);
+    }
+  }, [midElem, urlBanner]);
+
   return (
     <header className="header overflow-hidden">
       <div className="header__banner h-full d-flex justify-content-center">
-        <img
-          className="header__banner-image"
-          src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/128547-aVWJmZz9dwJJ.jpg"
-          alt="banner"
-        />
+        <img className="header__banner-image" src={urlBanner} alt="banner" />
         <div className="searchAnime absolute overflow-hidden d-flex">
           <input
             className="searchAnime__input w-full h-full"

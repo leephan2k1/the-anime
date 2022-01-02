@@ -2,15 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const carouselSlice = createSlice({
   name: "randomList",
-  initialState: { randomLst: [], middleElem: {} },
+  initialState: { randomLst: [], middleElem: "" },
   reducers: {
     addList: (state, action) => {
       state.randomLst = action.payload;
     },
     setMiddleElem: (state, action) => {
-      state.middleElem = state.randomLst.find(
-        (e) => e.anilist_id === action.payload
-      );
+      state.middleElem = action.payload;
     },
   },
 });
