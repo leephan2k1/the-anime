@@ -8,7 +8,7 @@ function SectionAnime(props) {
   const { title, data } = props;
 
   return (
-    <div className="section w-full d-flex flex-column">
+    <section className="section w-full d-flex flex-column">
       <a href="#" className="section__title">
         {title}
         <i className="fas fa-chevron-right"></i>
@@ -18,7 +18,7 @@ function SectionAnime(props) {
         carouselType={"carouselSection"}
         data={data}
       />
-    </div>
+    </section>
   );
 }
 
