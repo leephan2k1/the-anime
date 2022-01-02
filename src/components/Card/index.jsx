@@ -9,7 +9,7 @@ function Card(props) {
   return (
     <div className="cardContainer overflow-hidden position-relative">
       <span className="cardContainer__episode position-absolute">
-        {episode_duration}/{episode_count}
+        {episode_count}
       </span>
       <img className="cardContainer__img w-full h-full" src={imgSrc} alt={id} />
       <div className="cardContainer__playBtn position-absolute ">

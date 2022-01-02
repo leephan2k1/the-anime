@@ -1,29 +1,41 @@
-import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import Card from "../Card";
+import { getMiddleElement, handleMainCarouselCSS } from "../../utils";
 import Button from "../Button";
-
+import Card from "../Card";
 import MyLoader from "../MyLoader";
-
-import { handleMainCarouselCSS } from "../../settings";
-
 import "./styles.scss";
+//redux
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setMiddleElem } from "../../components/Carousel/carouselSlice";
+import { randomList } from "../../app/selectors";
 
 function Carousel(props) {
-  const { settings, carouselType, data } = props;
+  const { settings, carouselType } = props;
   const sliderRef = useRef(null);
+  const data = useSelector(randomList);
+  const dispatch = useDispatch();
 
-  //Effect handle CSS for main Carousel
+  settings.afterChange = () => {
+    handleMainCarouselCSS();
+    const id = getMiddleElement();
+    dispatch(setMiddleElem(id));
+  };
+  //Effect handle CSS for main Carousel first time
   useEffect(() => {
     if (carouselType === "carouselMain") {
       handleMainCarouselCSS();
+      if (data.length) {
+        const id = getMiddleElement();
+        dispatch(setMiddleElem(id));
+      }
     }
-  }, [data]);
+  }, [data.length]);
 
   return (
     <div className={carouselType}>
-      {/* <div className="controller position-absolute d-flex justify-content-between"> */}
       <Button type={"Prev"} handleEvent={() => sliderRef.current.slickPrev()} />
       <Button type={"Next"} handleEvent={() => sliderRef.current.slickNext()} />
 
@@ -33,11 +45,12 @@ function Carousel(props) {
               return (
                 <div
                   key={elem.anilist_id}
+                  data-id={elem.anilist_id}
                   className="cardWrapper d-flex justify-content-center"
                 >
                   <Card
                     imgSrc={elem.cover_image}
-                    episode_count={elem.episode_count}
+                    episode_count={elem.episodes_count}
                     episode_duration={elem.episode_duration}
                     id={elem.anilist_id}
                   />
@@ -62,12 +75,10 @@ function Carousel(props) {
 Carousel.propTypes = {
   settings: PropTypes.object,
   carouselType: PropTypes.string,
-  data: PropTypes.array,
 };
 Carousel.defaultProps = {
   settings: {},
   carouselType: "",
-  data: [],
 };
 
 export default Carousel;
