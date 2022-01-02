@@ -12,7 +12,7 @@ function Card(props) {
         {episode_duration}/{episode_count}
       </span>
       <img className="cardContainer__img w-full h-full" src={imgSrc} alt={id} />
-      <div className="cardContainer__playBtn position-absolute">
+      <div className="cardContainer__playBtn position-absolute ">
         <Button
           type={"Play"}
           handleEvent={() => {
