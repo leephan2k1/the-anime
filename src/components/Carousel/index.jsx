@@ -4,6 +4,8 @@ import Slider from "react-slick";
 import Card from "../Card";
 import Button from "../Button";
 
+import MyLoader from "../MyLoader";
+
 import { handleMainCarouselCSS } from "../../settings";
 
 import "./styles.scss";
@@ -17,51 +19,41 @@ function Carousel(props) {
     if (carouselType === "carouselMain") {
       handleMainCarouselCSS();
     }
-  }, []);
+  }, [data]);
 
   return (
     <div className={carouselType}>
       {/* <div className="controller position-absolute d-flex justify-content-between"> */}
       <Button type={"Prev"} handleEvent={() => sliderRef.current.slickPrev()} />
       <Button type={"Next"} handleEvent={() => sliderRef.current.slickNext()} />
-      {/* </div> */}
+
       <Slider {...settings} ref={sliderRef}>
-        {/* at least 6 elements */}
-        {data &&
-          data.length > 0 &&
-          data.map((elem) => {
-            return (
-              <div
-                key={elem.anilist_id}
-                className="cardWrapper d-flex justify-content-center"
-              >
-                <Card
-                  imgSrc={elem.cover_image}
-                  episode_count={elem.episode_count}
-                  episode_duration={elem.episode_duration}
-                  id={elem.anilist_id}
-                />
-              </div>
-            );
-          })}
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
-        <div className="cardWrapper d-flex justify-content-center">
-          <Card />
-        </div>
+        {data && data.length > 0
+          ? data.map((elem) => {
+              return (
+                <div
+                  key={elem.anilist_id}
+                  className="cardWrapper d-flex justify-content-center"
+                >
+                  <Card
+                    imgSrc={elem.cover_image}
+                    episode_count={elem.episode_count}
+                    episode_duration={elem.episode_duration}
+                    id={elem.anilist_id}
+                  />
+                </div>
+              );
+            })
+          : [...Array(10).keys()].map((e) => {
+              return (
+                <div
+                  key={e}
+                  className="cardWrapper d-flex justify-content-center"
+                >
+                  <MyLoader className={"cardContainer"} />
+                </div>
+              );
+            })}
       </Slider>
     </div>
   );

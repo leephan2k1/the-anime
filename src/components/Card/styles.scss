@@ -22,6 +22,7 @@
 
   &__img {
     object-fit: cover;
+    aspect-ratio: 2/3;
   }
   &__episode {
     border: 1px solid tomato;
