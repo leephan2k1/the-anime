@@ -5,17 +5,18 @@ import Carousel from "../Carousel";
 import "./styles.scss";
 
 function SectionAnime(props) {
-  const { title } = props;
+  const { title, data } = props;
 
   return (
     <div className="section w-full d-flex flex-column">
       <a href="#" className="section__title">
-        Anime mới cập nhật
+        {title}
         <i className="fas fa-chevron-right"></i>
       </a>
       <Carousel
         settings={sectionCarouselSettings}
         carouselType={"carouselSection"}
+        data={data}
       />
     </div>
   );
@@ -23,6 +24,7 @@ function SectionAnime(props) {
 
 SectionAnime.propTypes = {
   title: PropTypes.string,
+  data: PropTypes.array,
 };
 
 export default SectionAnime;

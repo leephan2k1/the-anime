@@ -7,15 +7,12 @@ import Card from "../Card";
 import MyLoader from "../MyLoader";
 import "./styles.scss";
 //redux
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setMiddleElem } from "../../components/Carousel/carouselSlice";
-import { randomList } from "../../app/selectors";
 
 function Carousel(props) {
-  const { settings, carouselType } = props;
+  const { settings, carouselType, data } = props;
   const sliderRef = useRef(null);
-  const data = useSelector(randomList);
   const dispatch = useDispatch();
 
   settings.afterChange = () => {
@@ -75,10 +72,12 @@ function Carousel(props) {
 Carousel.propTypes = {
   settings: PropTypes.object,
   carouselType: PropTypes.string,
+  data: PropTypes.array,
 };
 Carousel.defaultProps = {
   settings: {},
   carouselType: "",
+  data: [],
 };
 
 export default Carousel;
