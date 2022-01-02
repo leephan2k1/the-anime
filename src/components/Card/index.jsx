@@ -4,7 +4,7 @@ import "./styles.scss";
 import Button from "../Button";
 
 function Card(props) {
-  const { imgSrc, episode_count, episode_duration, id } = props;
+  const { imgSrc, episode_count, id, typeCard, title } = props;
 
   return (
     <div className="cardContainer overflow-hidden position-relative">
@@ -20,6 +20,9 @@ function Card(props) {
           }}
         />
       </div>
+      {typeCard === "details" ? (
+        <div className="cardContainer__details">{title}</div>
+      ) : null}
     </div>
   );
 }

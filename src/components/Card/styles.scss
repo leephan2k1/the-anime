@@ -9,6 +9,12 @@
   margin: 0 5px;
   transition: all 0.3s !important;
   box-shadow: 3px 10px 32px 7px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  &__details {
+    font-size: 1.5rem;
+    max-height: 50px;
+    min-height: 50px;
+  }
   &:hover &__playBtn {
     display: block;
   }
@@ -32,7 +38,6 @@
     text-align: center;
     margin: 5px;
     padding: 5px;
-    color: #fff;
     font-size: 1.5rem;
   }
 }

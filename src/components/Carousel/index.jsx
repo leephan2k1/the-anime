@@ -50,6 +50,14 @@ function Carousel(props) {
                     episode_count={elem.episodes_count}
                     episode_duration={elem.episode_duration}
                     id={elem.anilist_id}
+                    typeCard={
+                      carouselType === "carouselSection"
+                        ? "details"
+                        : "notDetails"
+                    }
+                    title={
+                      carouselType === "carouselSection" ? elem.titles.en : null
+                    }
                   />
                 </div>
               );

@@ -30,7 +30,7 @@ export default function HomePage() {
           10
         );
         setNewAniList(dataFilter.data.documents);
-        // console.log(dataFilter);
+        // console.log(dataFilter.data.documents);
         dispatch(addList(listHasBanner));
       } catch (error) {
         console.log(error);
