@@ -5,6 +5,56 @@
   // background-color: aqua;
   font-size: 1.5rem;
   position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.8662815467984069) 21%,
+      rgba(0, 0, 0, 0) 87%
+    );
+  }
+  &__desc,
+  &__title {
+    position: absolute;
+    color: #fff;
+    left: 2%;
+  }
+  &__desc {
+    top: 45%;
+    left: 2%;
+    max-width: 30%;
+    height: 45%;
+    @include mobileSmall {
+      display: none !important;
+    }
+  }
+  &__desc.text-truncate.text-truncate--2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+
+  &__title {
+    top: 30%;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @include mobileSmall {
+      left: 5%;
+    }
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
   &__banner {
     &-image {
       object-fit: cover;
