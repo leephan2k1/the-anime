@@ -16,7 +16,6 @@ export default function Header() {
 
   return (
     <header className="header overflow-hidden">
-      {console.log("check render")}
       <div className="header__banner h-full d-flex justify-content-center">
         <img className="header__banner-image" src={urlBanner} alt="banner" />
         <div className="searchAnime absolute overflow-hidden d-flex">

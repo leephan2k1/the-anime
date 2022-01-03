@@ -30,6 +30,7 @@
     color: $icon-color;
     font-size: 4rem;
     display: none;
+    cursor: pointer;
     @include mobile {
       display: block;
     }

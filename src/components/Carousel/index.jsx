@@ -44,7 +44,7 @@ function Carousel(props) {
               return (
                 <div
                   key={elem.anilist_id}
-                  data-id={elem.anilist_id}
+                  data-id={elem.id}
                   className={`cardWrapper d-flex justify-content-center`}
                 >
                   {renderType === "Box" ? (

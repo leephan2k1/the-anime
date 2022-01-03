@@ -1,0 +1,43 @@
+@import "../../assets/styles/_variable.scss";
+@import "../../assets/styles/mixin";
+
+.sideBar {
+  display: flex;
+  width: 65%;
+  height: 100vh;
+  background-color: #0d0d0d;
+  z-index: 601;
+  position: fixed;
+  color: #fff;
+  transform: translateX(-100%);
+  transition: all 0.5s;
+  @include tablet {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+
+  &__logo {
+    font-family: SVN-Kashima Brush;
+    font-weight: bold;
+    color: $icon-color;
+    font-size: 5rem;
+  }
+  &__list {
+    width: 100%;
+    font-size: 2rem;
+    li {
+      margin: 2rem 0;
+      a {
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+    .active {
+      border-bottom: 5px solid $icon-color;
+      border-radius: 10px;
+      padding: 5px;
+    }
+  }
+}

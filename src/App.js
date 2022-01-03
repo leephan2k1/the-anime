@@ -1,6 +1,8 @@
 import "./App.scss";
 import NavBar from "./components/NavBar";
 import Anime from "./pages/Anime";
+import SideBar from "./components/SideBar";
+
 import { Suspense, lazy, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -17,7 +19,7 @@ function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [newAniList, setNewAniList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
-
+  const [toggleSideBar, setToggleSideBar] = useState(true);
   const dispatch = useDispatch();
 
   //call api
@@ -70,6 +72,7 @@ function App() {
           fallSeason: fallSeason.data.documents,
           winterSeason: winterSeason.data.documents,
         };
+
         dispatch(setSeasonBannerList(seasonPayLoad));
       } catch (error) {
         console.log(error);
@@ -78,9 +81,44 @@ function App() {
     fetchRamdomList();
   }, []);
 
+  //Handle Event Click button
+  const handleEffectSideBar = () => {
+    const sideBar = document.querySelector(".sideBar");
+    if (sideBar) {
+      sideBar.style.cssText = "transform: translateX(-100%)";
+    }
+    setToggleSideBar(!toggleSideBar);
+  };
+  useEffect(() => {
+    const menuBtn = document.querySelector(".bi-list");
+    const overlay = document.querySelector(".Anime-app__overlay");
+
+    const handleActiveSideBar = () => {
+      const sideBar = document.querySelector(".sideBar");
+      setToggleSideBar(!toggleSideBar);
+      // console.log(toggleSideBar);
+      if (toggleSideBar) {
+        sideBar.style.cssText = "transform: translateX(0%)";
+      } else {
+        sideBar.style.cssText = "transform: translateX(-100%)";
+      }
+    };
+    if (overlay) overlay.addEventListener("click", handleActiveSideBar);
+    menuBtn.addEventListener("click", handleActiveSideBar);
+    //clean up event
+    return () => {
+      menuBtn.removeEventListener("click", handleActiveSideBar);
+      if (overlay) overlay.removeEventListener("click", handleActiveSideBar);
+    };
+  }, [toggleSideBar]);
+
   return (
     <div className="Anime-app d-flex flex-column">
+      {toggleSideBar === false ? (
+        <div className="Anime-app__overlay"></div>
+      ) : null}
       <NavBar />
+      <SideBar handleEffectSideBar={handleEffectSideBar} />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route

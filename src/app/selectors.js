@@ -8,8 +8,6 @@ export const remainMiddleElem = createSelector(
   homeList,
   middleElemId,
   (randomLst, middleElem) => {
-    return (
-      randomLst.length && randomLst.find((e) => e.anilist_id === +middleElem)
-    );
+    return randomLst.length && randomLst.find((e) => e.id === +middleElem);
   }
 );

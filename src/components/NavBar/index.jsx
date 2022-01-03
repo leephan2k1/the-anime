@@ -5,6 +5,7 @@ import "./styles.scss";
 export default function NavBar() {
   const [isActive, setActive] = useState(false);
 
+  //Active css scroll
   useEffect(() => {
     const handleScroll = () => {
       setActive(window.scrollY > 60);

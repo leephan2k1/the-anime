@@ -4,15 +4,16 @@ import { homeList } from "../../app/selectors";
 import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
 import SectionAnime from "../../components/SectionAnime";
-import SectionSeason from "../../components/SectionSeason";
 import SectionCategory from "../../components/SectionCategory";
+import SectionSeason from "../../components/SectionSeason";
 import { mainCarouselSettings } from "../../settings";
 
-export default function HomePage(props) {
+function HomePage(props) {
   const data = useSelector(homeList);
-  const { newAniList, suggestList, seasonList } = props;
+  const { newAniList, suggestList } = props;
   return (
     <div className="w-full h-full">
+      {console.log("check homepage render")}
       <Header />
       <Carousel
         settings={mainCarouselSettings}
@@ -26,3 +27,5 @@ export default function HomePage(props) {
     </div>
   );
 }
+
+export default React.memo(HomePage);
