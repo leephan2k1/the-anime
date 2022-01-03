@@ -5,7 +5,6 @@ import Button from "../Button";
 
 function Card(props) {
   const { imgSrc, episode_count, id, typeCard, title } = props;
-
   return (
     <div className="cardContainer overflow-hidden position-relative">
       <span className="cardContainer__episode position-absolute">

@@ -5,6 +5,7 @@ import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
 import SectionAnime from "../../components/SectionAnime";
 import SectionSeason from "../../components/SectionSeason";
+import SectionCategory from "../../components/SectionCategory";
 import { mainCarouselSettings } from "../../settings";
 
 export default function HomePage(props) {
@@ -21,6 +22,7 @@ export default function HomePage(props) {
       <SectionAnime title={"Anime mới cập nhật"} data={newAniList} />
       <SectionSeason />
       <SectionAnime title={"Hôm nay xem gì?"} data={suggestList} />
+      <SectionCategory title={"Thể loại"} />
     </div>
   );
 }

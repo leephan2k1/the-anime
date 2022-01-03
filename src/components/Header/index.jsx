@@ -9,15 +9,14 @@ export default function Header() {
   const midElem = useSelector(remainMiddleElem);
 
   useEffect(() => {
-    // console.log([midElem]);
     if (midElem) {
       setUrlBanner(midElem.banner_image);
-      // console.log(urlBanner);
     }
-  }, [midElem, urlBanner]);
+  }, [urlBanner, midElem]);
 
   return (
     <header className="header overflow-hidden">
+      {console.log("check render")}
       <div className="header__banner h-full d-flex justify-content-center">
         <img className="header__banner-image" src={urlBanner} alt="banner" />
         <div className="searchAnime absolute overflow-hidden d-flex">

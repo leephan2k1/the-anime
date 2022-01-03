@@ -1,15 +1,16 @@
 .sectionSeason {
   &__content {
-    margin: 5rem auto;
+    margin: 3rem auto;
     width: 100%;
     height: 300px;
     cursor: pointer;
     z-index: 5;
     color: #fff;
     font-size: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
     &::before {
       z-index: 6;
-
       content: "";
       position: absolute;
       width: 100%;
@@ -21,7 +22,7 @@
     &__image {
       object-fit: cover;
       object-position: center;
-      border-radius: 10px;
+
       height: 100%;
       width: 100%;
     }

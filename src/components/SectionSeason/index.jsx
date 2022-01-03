@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Container, Row, Col } from "reactstrap";
-import Box from "../../components/Box";
-
 import { useSelector } from "react-redux";
+import { Col, Container, Row } from "reactstrap";
 import { seasonBannerList } from "../../app/selectors";
-
+import Box from "../../components/Box";
 import "./styles.scss";
+
 function SectionSeason(props) {
   const data = useSelector(seasonBannerList);
   const [listSeason, setListSeason] = useState([]);
@@ -32,7 +30,6 @@ function SectionSeason(props) {
 
   return (
     <section className="section sectionSeason d-flex flex-column justify-content-center ">
-      {console.log(listSeason)}
       <a href="#" className="section__title">
         Bộ sưu tập
         <i className="fas fa-chevron-right"></i>

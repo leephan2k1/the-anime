@@ -80,7 +80,6 @@ function App() {
 
   return (
     <div className="Anime-app d-flex flex-column">
-      {console.log("app render")}
       <NavBar />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
