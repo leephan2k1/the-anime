@@ -4,6 +4,8 @@ import { Col, Container, Row } from "reactstrap";
 import { seasonBannerList } from "../../app/selectors";
 import Box from "../../components/Box";
 import "./styles.scss";
+import { seasonSectionLoaderSettings } from "../../settings";
+import MyLoader from "../../components/MyLoader";
 
 function SectionSeason(props) {
   const data = useSelector(seasonBannerList);
@@ -36,25 +38,31 @@ function SectionSeason(props) {
       </a>
       <Container>
         <Row>
-          {listSeason &&
-            listSeason.length &&
-            listSeason.map((e) => {
-              return (
-                <Col key={e.anilist_id} lg="3" md="6" sm="6">
-                  <Box
-                    classNames={{
-                      wrapperClassName:
-                        "sectionSeason__content overflow-hidden position-relative",
-                      imgClassName:
-                        "sectionSeason__content__image position-relative",
-                      titleClassName: "sectionSeason__content__title",
-                    }}
-                    imgUrl={e.banner_image}
-                    title={e.season_period}
-                  />
-                </Col>
-              );
-            })}
+          {listSeason && listSeason.length
+            ? listSeason.map((e) => {
+                return (
+                  <Col key={e.anilist_id} lg="3" md="6" sm="6">
+                    <Box
+                      classNames={{
+                        wrapperClassName:
+                          "sectionSeason__content overflow-hidden position-relative",
+                        imgClassName:
+                          "sectionSeason__content__image position-relative",
+                        titleClassName: "sectionSeason__content__title",
+                      }}
+                      imgUrl={e.banner_image}
+                      title={e.season_period}
+                    />
+                  </Col>
+                );
+              })
+            : [...Array(4).keys()].map((e) => {
+                return (
+                  <Col key={e} lg="3" md="6" sm="6">
+                    <MyLoader stloader={seasonSectionLoaderSettings} />
+                  </Col>
+                );
+              })}
         </Row>
       </Container>
     </section>

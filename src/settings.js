@@ -114,3 +114,9 @@ export const headerLoaderSettings = {
   height: 400,
   viewBox: "0 0 2400 400",
 };
+export const seasonSectionLoaderSettings = {
+  speed: 0.3,
+  width: 300,
+  height: 300,
+  viewBox: "0 0 400 300",
+};
