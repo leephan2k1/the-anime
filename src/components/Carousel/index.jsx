@@ -8,7 +8,7 @@ import MyLoader from "../MyLoader";
 import "./styles.scss";
 //redux
 import { useDispatch } from "react-redux";
-import { setMiddleElem } from "../../components/Carousel/carouselSlice";
+import { setMiddleElem } from "../../app/listSlice";
 
 function Carousel(props) {
   const { settings, carouselType, data } = props;

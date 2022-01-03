@@ -1,10 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import carouselSlice from "../components/Carousel/carouselSlice";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import listSlice from "./listSlice";
 
 const store = configureStore({
   reducer: {
-    randomList: carouselSlice,
+    homeList: listSlice,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export default store;

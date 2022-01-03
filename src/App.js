@@ -8,7 +8,8 @@ import ANIAPI from "@mattplays/aniapi";
 import aniListApi from "./api/aniListAPI";
 
 import { useDispatch } from "react-redux";
-import { addList } from "./components/Carousel/carouselSlice";
+import { addList } from "./app/listSlice";
+import { setSeasonBannerList } from "./app/listSlice";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -16,6 +17,7 @@ function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [newAniList, setNewAniList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
+
   const dispatch = useDispatch();
 
   //call api
@@ -47,6 +49,28 @@ function App() {
         );
         //store to state
         setSuggestList(dataSuggest.data.documents);
+
+        const springSeason = await API.Anime.Get(
+          { year: 2021, season: 1 },
+          1,
+          2
+        );
+        const summerSeason = await API.Anime.Get(
+          { year: 2021, season: 2 },
+          1,
+          2
+        );
+        const fallSeason = await API.Anime.Get({ year: 2021, season: 3 }, 1, 2);
+        const winterSeason = await API.Anime.Get({ season: 4 }, 1, 2);
+
+        //store to redux
+        const seasonPayLoad = {
+          springSeason: springSeason.data.documents,
+          summerSeason: summerSeason.data.documents,
+          fallSeason: fallSeason.data.documents,
+          winterSeason: winterSeason.data.documents,
+        };
+        dispatch(setSeasonBannerList(seasonPayLoad));
       } catch (error) {
         console.log(error);
       }

@@ -1,10 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-export const randomList = (state) => state.randomList.randomLst;
-export const middleElemId = (state) => state.randomList.middleElem;
+export const homeList = (state) => state.homeList.randomLst;
+export const middleElemId = (state) => state.homeList.middleElem;
+export const seasonBannerList = (state) => state.homeList.seasonsBannerList;
 
 export const remainMiddleElem = createSelector(
-  randomList,
+  homeList,
   middleElemId,
   (randomLst, middleElem) => {
     return (

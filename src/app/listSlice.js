@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const carouselSlice = createSlice({
-  name: "randomList",
-  initialState: { randomLst: [], middleElem: "" },
+  name: "homeList",
+  initialState: { randomLst: [], middleElem: "", seasonsBannerList: {} },
   reducers: {
     addList: (state, action) => {
       state.randomLst = action.payload;
@@ -10,9 +10,13 @@ const carouselSlice = createSlice({
     setMiddleElem: (state, action) => {
       state.middleElem = action.payload;
     },
+    setSeasonBannerList: (state, action) => {
+      // console.log(action.payload);
+      state.seasonsBannerList = action.payload;
+    },
   },
 });
 
 const { actions, reducer } = carouselSlice;
-export const { addList, setMiddleElem } = actions;
+export const { addList, setMiddleElem, setSeasonBannerList } = actions;
 export default reducer;

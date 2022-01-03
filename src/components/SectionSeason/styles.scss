@@ -16,21 +16,21 @@
       height: 100%;
       top: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.5);
     }
     &__image {
       object-fit: cover;
       object-position: center;
       border-radius: 10px;
-      height: 250px;
-      width: 300px;
+      height: 100%;
+      width: 100%;
     }
     &__title {
       z-index: 8;
       position: absolute;
       width: 100%;
       text-align: center;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }

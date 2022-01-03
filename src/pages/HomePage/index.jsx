@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { randomList } from "../../app/selectors";
+import { homeList } from "../../app/selectors";
 import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
 import SectionAnime from "../../components/SectionAnime";
@@ -8,9 +8,8 @@ import SectionSeason from "../../components/SectionSeason";
 import { mainCarouselSettings } from "../../settings";
 
 export default function HomePage(props) {
-  const data = useSelector(randomList);
-  const { newAniList, suggestList } = props;
-
+  const data = useSelector(homeList);
+  const { newAniList, suggestList, seasonList } = props;
   return (
     <div className="w-full h-full">
       <Header />
