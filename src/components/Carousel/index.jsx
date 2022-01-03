@@ -6,7 +6,7 @@ import Button from "../Button";
 import Card from "../Card";
 import MyLoader from "../MyLoader";
 import Box from "../Box";
-
+import { carouselLoaderSettings } from "../../settings";
 import "./styles.scss";
 //redux
 import { useDispatch } from "react-redux";
@@ -86,7 +86,10 @@ function Carousel(props) {
                   key={e}
                   className="cardWrapper d-flex justify-content-center"
                 >
-                  <MyLoader className={"cardContainer"} />
+                  <MyLoader
+                    className={"cardContainer"}
+                    stloader={carouselLoaderSettings}
+                  />
                 </div>
               );
             })}
