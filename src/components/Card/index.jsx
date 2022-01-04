@@ -2,27 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
 import Button from "../Button";
+import { Link } from "react-router-dom";
 
 function Card(props) {
   const { imgSrc, episode_count, id, typeCard, title } = props;
   return (
-    <div className="cardContainer overflow-hidden position-relative">
+    <Link
+      to={`/anime/details/${id}`}
+      className="cardContainer overflow-hidden position-relative"
+    >
       <span className="cardContainer__episode position-absolute">
         {episode_count}
       </span>
       <img className="cardContainer__img w-full h-full" src={imgSrc} alt={id} />
       <div className="cardContainer__playBtn position-absolute ">
-        <Button
-          type={"Play"}
-          handleEvent={() => {
-            console.log("handle play");
-          }}
-        />
+        <Button type={"Play"} />
       </div>
       {typeCard === "details" ? (
         <div className="cardContainer__details">{title}</div>
       ) : null}
-    </div>
+    </Link>
   );
 }
 

@@ -63,7 +63,7 @@ function Carousel(props) {
                       imgSrc={elem.cover_image}
                       episode_count={elem.episodes_count}
                       episode_duration={elem.episode_duration}
-                      id={elem.anilist_id}
+                      id={elem.id}
                       typeCard={
                         carouselType === "carouselSection"
                           ? "details"

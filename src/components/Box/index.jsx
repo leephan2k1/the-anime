@@ -2,14 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Box(props) {
-  const { title, imgUrl, classNames } = props;
+  const { title, imgUrl, classNames, children } = props;
 
   return (
     <div className={classNames.wrapperClassName}>
       {imgUrl && (
         <img className={classNames.imgClassName} src={imgUrl} alt={title} />
       )}
-      <div className={classNames.titleClassName}>{title}</div>
+      {title ? <div className={classNames.titleClassName}>{title}</div> : null}
+      {children}
     </div>
   );
 }

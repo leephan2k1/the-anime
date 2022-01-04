@@ -1,6 +1,6 @@
 import "./App.scss";
 import NavBar from "./components/NavBar";
-import Anime from "./pages/Anime";
+// import Anime from "./pages/Anime";
 import SideBar from "./components/SideBar";
 
 import { Suspense, lazy, useState, useEffect } from "react";
@@ -14,6 +14,7 @@ import { addList } from "./app/listSlice";
 import { setSeasonBannerList } from "./app/listSlice";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+const Anime = lazy(() => import("./pages/Anime"));
 
 function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -126,8 +127,15 @@ function App() {
             element={
               <HomePage newAniList={newAniList} suggestList={suggestList} />
             }
+          ></Route>
+          <Route
+            path="/anime"
+            element={
+              <HomePage newAniList={newAniList} suggestList={suggestList} />
+            }
           />
-          <Route path="/anime" element={<Anime />} />
+          <Route path="anime/details/:animeId" element={<Anime />}></Route>
+
           <Route
             path="*"
             element={
