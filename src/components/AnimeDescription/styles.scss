@@ -1,9 +1,8 @@
 @import "../../assets/styles/mixin";
 
 .animeDescription {
-  // background-color: tomato;
   background-color: #0d0d0d;
-  margin-bottom: 4rem;
+  // margin-bottom: 2rem;
   width: 100%;
   .load_wrapper {
     max-height: 50px;
@@ -83,6 +82,7 @@
         transition: all 0.3s;
         cursor: pointer;
         &:hover {
+          color: #fff;
           transform: scale(110%);
         }
         .bi-play-fill {

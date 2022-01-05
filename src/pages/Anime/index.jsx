@@ -1,29 +1,37 @@
+import ANIAPI from "@mattplays/aniapi";
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import AnimeHeader from "../../components/AnimeHeader";
 import AnimeDescription from "../../components/AnimeDescription";
 import AnimeEpisode from "../../components/AnimeEpisode";
-
+import AnimeHeader from "../../components/AnimeHeader";
+// import { Outlet } from "react-router-dom";
 import "./styles.scss";
-
-import ANIAPI from "@mattplays/aniapi";
 
 export default function Anime(props) {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [animeDetails, setAnimeDetails] = useState({});
-  const params = useParams();
+  const [episode, setEpisode] = useState({});
+  const { animeId } = useParams();
 
   //Call API
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await API.Anime.GetByID(params.animeId);
+        const response = await API.Anime.GetByID(animeId);
         // console.log(response.data);
         if (response.status_code === 200) {
           setAnimeDetails(response.data);
         } else {
           console.log("not found anime!!");
+        }
+        const responseEpisode = await API.Episode.Get({
+          anime_id: animeId,
+        });
+        if (responseEpisode.status_code === 200) {
+          setEpisode(responseEpisode.data);
+        } else {
+          console.log("not found episode anime!!");
+          setEpisode("Not found episode");
         }
       } catch (error) {
         console.log("fetch anime failed with error: ", error);
@@ -34,10 +42,9 @@ export default function Anime(props) {
 
   return (
     <div className="Anime-detail w-full d-flex flex-column">
-      {/* {console.log(animeDetails)} */}
       <AnimeHeader data={animeDetails} />
-      <AnimeDescription data={animeDetails} />
-      {/* <AnimeEpisode /> */}
+      <AnimeDescription data={animeDetails} episode={episode} />
+      <AnimeEpisode data={episode} thumbnail={animeDetails?.cover_image} />
     </div>
   );
 }

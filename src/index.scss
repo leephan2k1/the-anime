@@ -8,7 +8,9 @@
   font-style: normal;
   font-display: swap;
 }
-
+:root {
+  --plyr-color-main: tomato;
+}
 * {
   box-sizing: border-box;
   margin: 0;

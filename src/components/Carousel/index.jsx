@@ -13,15 +13,18 @@ import { useDispatch } from "react-redux";
 import { setMiddleElem } from "../../app/listSlice";
 
 function Carousel(props) {
-  const { settings, carouselType, data, renderType } = props;
+  const { settings, carouselType, data, renderType, customThumbnail } = props;
   const sliderRef = useRef(null);
   const dispatch = useDispatch();
 
-  settings.afterChange = () => {
-    handleMainCarouselCSS();
-    const id = getMiddleElement();
-    dispatch(setMiddleElem(id));
-  };
+  if (carouselType === "carouselMain") {
+    settings.afterChange = () => {
+      handleMainCarouselCSS();
+      const id = getMiddleElement();
+      dispatch(setMiddleElem(id));
+    };
+  }
+
   //Effect handle CSS for main Carousel first time
   useEffect(() => {
     if (carouselType === "carouselMain") {
@@ -31,6 +34,9 @@ function Carousel(props) {
         dispatch(setMiddleElem(id));
       }
     }
+    return () => {
+      settings.afterChange = null;
+    };
   }, [data.length]);
 
   return (
@@ -40,10 +46,10 @@ function Carousel(props) {
 
       <Slider {...settings} ref={sliderRef}>
         {data && data.length > 0
-          ? data.map((elem) => {
+          ? data.map((elem, index) => {
               return (
                 <div
-                  key={elem.anilist_id}
+                  key={elem.anilist_id + index}
                   data-id={elem.id}
                   className={`cardWrapper d-flex justify-content-center`}
                 >
@@ -60,8 +66,8 @@ function Carousel(props) {
                     />
                   ) : (
                     <Card
-                      imgSrc={elem.cover_image}
-                      episode_count={elem.episodes_count}
+                      imgSrc={customThumbnail || elem.cover_image}
+                      episode_count={elem.episodes_count || elem.number}
                       episode_duration={elem.episode_duration}
                       id={elem.id}
                       typeCard={
@@ -71,7 +77,7 @@ function Carousel(props) {
                       }
                       title={
                         carouselType === "carouselSection"
-                          ? elem.titles.en
+                          ? elem.titles?.en || `Tập ${index + 1}`
                           : null
                       }
                       customCard={"categoryCard"}

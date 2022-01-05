@@ -5,7 +5,24 @@ import Carousel from "../Carousel";
 import "./styles.scss";
 
 function SectionAnime(props) {
-  const { title, data } = props;
+  const { title, data, thumbnail, sectionType } = props;
+
+  //configure 4 AnimeEpisode Component
+  if (sectionType === "Episode") {
+    sectionCarouselSettings.infinite = false;
+    sectionCarouselSettings.speed = 150;
+    sectionCarouselSettings.responsive[0] = {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: false,
+      },
+    };
+    // sectionCarouselSettings.responsive[0]?.settings?.infinite = false;
+    // sectionCarouselSettings.responsive[0]?.settings?.infinite = false;
+  }
 
   return (
     <section className="section w-full d-flex flex-column">
@@ -17,6 +34,7 @@ function SectionAnime(props) {
         settings={sectionCarouselSettings}
         carouselType={"carouselSection"}
         data={data}
+        customThumbnail={thumbnail}
       />
     </section>
   );

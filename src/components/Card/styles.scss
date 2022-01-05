@@ -1,3 +1,6 @@
+@import "../../assets/styles/_variable.scss";
+@import "../../assets/styles/mixin";
+
 .cardContainer {
   height: 100%;
   width: 75%;
@@ -17,6 +20,9 @@
   }
   &:hover &__playBtn {
     display: block;
+  }
+  &:hover {
+    color: $acive-color;
   }
   &__playBtn {
     display: none;

@@ -1,5 +1,13 @@
 .animeEpisode {
   //   margin-top: 8rem;
-  height: 500px;
-  //   background-color: red;
+  height: 600px;
+  // background-color: red;
+  &__notFound {
+    width: 300px;
+    height: 50%;
+  }
+  &__message {
+    color: #fff;
+    font-size: 2rem;
+  }
 }

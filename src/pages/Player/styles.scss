@@ -1,0 +1,22 @@
+.animeZonePlayer {
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  position: relative;
+  .bi-arrow-left {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 5rem;
+    color: tomato;
+    cursor: pointer;
+    &:hover {
+      transform: scale(120%);
+    }
+  }
+  .plyr {
+    width: 100vw;
+  }
+}

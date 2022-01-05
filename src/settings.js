@@ -70,7 +70,7 @@ export const categoryCarouselSettings = {
 };
 export const sectionCarouselSettings = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 300,
   slidesToShow: 5,
   slidesToScroll: 2,
@@ -81,8 +81,8 @@ export const sectionCarouselSettings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
-        dots: true,
+        infinite: false,
+        dots: false,
       },
     },
     {
