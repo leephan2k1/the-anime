@@ -1,0 +1,56 @@
+@import "../../assets/styles/_variable.scss";
+@import "../../assets/styles/mixin";
+
+.browse {
+  height: 100vh;
+  //   background-color: tomato;
+  &__filters {
+    margin-top: 90px;
+    height: fit-content;
+    // background-color: blue;
+    font-size: 1.5rem;
+    color: #fff;
+    .filter-title {
+      margin: 1rem 0;
+    }
+    .inputWrapper {
+      width: 50%;
+      @include desktop {
+        width: 30%;
+      }
+      border-radius: 10px;
+      height: 40px;
+      margin: 2rem 0;
+      background-color: $button-color;
+      &__search {
+        padding: 5px;
+        width: 90%;
+      }
+      .bi-search {
+        width: 10%;
+      }
+    }
+    .dropdown {
+      width: 80%;
+      height: 60px;
+      border-radius: 5px;
+      & > button {
+        font-size: 1.5rem;
+        width: 100%;
+        height: 70%;
+        background-color: $button-color;
+      }
+      &-menu {
+        z-index: 5000;
+        overflow-y: scroll;
+        max-height: 500px;
+        width: 100%;
+        font-size: 1.5rem;
+        & > button {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

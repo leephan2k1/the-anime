@@ -109,15 +109,7 @@
 
       &__input {
         padding: 10px;
-        border: none;
         z-index: 1;
-        background: transparent;
-        &:focus {
-          color: #fff;
-        }
-        &::placeholder {
-          color: #333;
-        }
       }
       .bi-search {
         font-size: 2rem;

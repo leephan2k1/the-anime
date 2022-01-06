@@ -17,6 +17,7 @@ import { setSeasonBannerList } from "./app/listSlice";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Anime = lazy(() => import("./pages/Anime"));
 const _404Page = lazy(() => import("./pages/404Page"));
+const Browse = lazy(() => import("./pages/Browse"));
 
 function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -25,7 +26,7 @@ function App() {
   const [toggleSideBar, setToggleSideBar] = useState(true);
   const dispatch = useDispatch();
 
-  //call api
+  //call api 4 homepage
   useEffect(() => {
     const fetchRamdomList = async () => {
       try {
@@ -138,6 +139,7 @@ function App() {
           />
           <Route path="anime/details/:animeId" element={<Anime />} />
           <Route path="anime/watch/:animeId" element={<Player />} />
+          <Route path="anime/browse" element={<Browse />} />
 
           <Route path="*" element={<_404Page />} />
         </Routes>
