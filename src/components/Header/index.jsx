@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import ANIAPI from "@mattplays/aniapi";
-import { remainMiddleElem } from "../../app/selectors";
+import { remainMiddleElem } from "app/selectors";
 import MyLoader from "../MyLoader";
-import { headerLoaderSettings } from "../../settings";
+import { headerLoaderSettings } from "settings";
 import { Link } from "react-router-dom";
 
 import "./styles.scss";

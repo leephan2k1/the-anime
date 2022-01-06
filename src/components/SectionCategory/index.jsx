@@ -1,5 +1,5 @@
 import React from "react";
-import { categoryCarouselSettings } from "../../settings";
+import { categoryCarouselSettings } from "settings";
 import Carousel from "../Carousel";
 import arrayData from "./supportData";
 

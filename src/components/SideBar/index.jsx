@@ -31,7 +31,7 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/ranking"
+            to="/anime/browse/ranking"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >
@@ -40,7 +40,7 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/category"
+            to="/anime/browse/category"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >
@@ -49,7 +49,7 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/new"
+            to="/anime/browse/new"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >

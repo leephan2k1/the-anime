@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Col, Container, Row } from "reactstrap";
-import { seasonBannerList } from "../../app/selectors";
-import Box from "../../components/Box";
+import { seasonBannerList } from "app/selectors";
+import Box from "components/Box";
+import MyLoader from "components/MyLoader";
+import { seasonSectionLoaderSettings } from "settings";
 import "./styles.scss";
-import { seasonSectionLoaderSettings } from "../../settings";
-import MyLoader from "../../components/MyLoader";
 
 function SectionSeason(props) {
   const data = useSelector(seasonBannerList);

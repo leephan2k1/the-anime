@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import defaultImage from "../../assets/images/WallpaperDog-962261.jpg";
-import Box from "../../components/Box";
+import defaultImage from "assets/images/WallpaperDog-962261.jpg";
+import Box from "components/Box";
 import MyLoader from "../MyLoader";
-import { carouselLoaderSettings } from "../../settings";
+import { carouselLoaderSettings } from "settings";
 
 import "./styles.scss";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
-import SectionAnime from "../../components/SectionAnime";
-import gomenasaiImg from "../../assets/images/gomenasai.jpg";
+import SectionAnime from "components/SectionAnime";
+import gomenasaiImg from "assets/images/gomenasai.jpg";
 
 export default function AnimeEpisode(props) {
   const { data, thumbnail } = props;

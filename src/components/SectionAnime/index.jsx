@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { sectionCarouselSettings } from "../../settings";
+import { sectionCarouselSettings } from "settings";
 import Carousel from "../Carousel";
 import "./styles.scss";
 

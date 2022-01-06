@@ -47,7 +47,7 @@ export default function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/ranking"
+            to="/anime/browse/ranking"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Bảng xếp hạng
@@ -55,7 +55,7 @@ export default function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/category"
+            to="/anime/browse/category"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Thể loại
@@ -63,7 +63,7 @@ export default function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/new"
+            to="/anime/browse/new"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Mới nhất

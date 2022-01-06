@@ -49,11 +49,11 @@ const genresFilter = {
 };
 const stateFilter = {
   title: "Trạng thái",
-  data: ["FINISHED", "RELEASING", "NOT_YET_RELEASED", "CANCELLED"],
+  data: ["Tất cả", "FINISHED", "RELEASING", "NOT_YET_RELEASED", "CANCELLED"],
 };
 const formatFilter = {
   title: "Định dạng",
-  data: ["TV", "TV_SHORT", "MOVIE", "SPECIAL", "OVA", "ONA", "MUSIC"],
+  data: ["Tất cả", "TV", "TV_SHORT", "MOVIE", "SPECIAL", "OVA", "ONA", "MUSIC"],
 };
 const sortFilter = {
   title: "Sắp xếp",

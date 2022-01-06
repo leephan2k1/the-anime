@@ -1,6 +1,6 @@
 import Plyr from "plyr-react";
 import "plyr-react/dist/plyr.css";
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import ANIAPI from "@mattplays/aniapi";
 import "./styles.scss";

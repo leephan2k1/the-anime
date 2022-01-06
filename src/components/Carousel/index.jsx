@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import { getMiddleElement, handleMainCarouselCSS } from "../../utils";
+import { getMiddleElement, handleMainCarouselCSS } from "utils";
 import Button from "../Button";
 import Card from "../Card";
 import MyLoader from "../MyLoader";
 import Box from "../Box";
-import { carouselLoaderSettings } from "../../settings";
+import { carouselLoaderSettings } from "settings";
 import "./styles.scss";
 //redux
 import { useDispatch } from "react-redux";
-import { setMiddleElem } from "../../app/listSlice";
+import { setMiddleElem } from "app/listSlice";
 
 function Carousel(props) {
   const { settings, carouselType, data, renderType, customThumbnail } = props;

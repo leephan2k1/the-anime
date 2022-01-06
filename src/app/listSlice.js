@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const carouselSlice = createSlice({
+const homeListSlice = createSlice({
   name: "homeList",
   initialState: { randomLst: [], middleElem: "", seasonsBannerList: {} },
   reducers: {
@@ -17,6 +17,6 @@ const carouselSlice = createSlice({
   },
 });
 
-const { actions, reducer } = carouselSlice;
+const { actions, reducer } = homeListSlice;
 export const { addList, setMiddleElem, setSeasonBannerList } = actions;
 export default reducer;

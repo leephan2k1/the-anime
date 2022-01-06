@@ -1,10 +1,34 @@
-import React from "react";
+import ANIAPI from "@mattplays/aniapi";
+import DropDown from "components/DropDown";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import DropDown from "../../components/DropDown";
+import Card from "components/Card";
 import "./styles.scss";
 import data from "./supportData";
 
 function Browse(props) {
+  const params = useParams();
+  const API = new ANIAPI.API("DUMMY_JWT");
+  // console.log(params);
+
+  //fetch API in filters
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await API.Anime.Get(
+  //       {
+  //         year: 2021,
+  //         season: 1,
+  //       },
+  //       1,
+  //       10
+  //     );
+  //     console.log(response);
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   return (
     <div className="browse w-full">
       <Container className="browse__filters w-full">
@@ -34,10 +58,73 @@ function Browse(props) {
                   xs="6"
                 >
                   <span className="filter-title">{elem.title}</span>
-                  <DropDown title={elem.data[0]} listItem={elem.data} />
+                  <DropDown
+                    id={index}
+                    title={elem.data[0]}
+                    listItem={elem.data}
+                  />
                 </Col>
               );
             })}
+        </Row>
+      </Container>
+
+      <Container className="browse__animeCards w-full">
+        <Row>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
+          <Col
+            lg="2"
+            md="4"
+            sm="6"
+            xs="6"
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Card />
+          </Col>
         </Row>
       </Container>
     </div>

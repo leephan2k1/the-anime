@@ -3,6 +3,7 @@
 
 .browse {
   height: 100vh;
+  overflow-y: scroll;
   //   background-color: tomato;
   &__filters {
     margin-top: 90px;
@@ -52,5 +53,11 @@
         }
       }
     }
+  }
+  &__animeCards {
+    height: fit-content;
+    // height: 100vh;
+    margin-bottom: 5rem;
+    // background-color: tomato;
   }
 }

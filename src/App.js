@@ -1,8 +1,7 @@
 import "./App.scss";
 import NavBar from "./components/NavBar";
-// import Anime from "./pages/Anime";
 import SideBar from "./components/SideBar";
-import Player from "./pages/Player"; //test!
+import Player from "./pages/Player";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -130,16 +129,23 @@ function App() {
             element={
               <HomePage newAniList={newAniList} suggestList={suggestList} />
             }
-          ></Route>
-          <Route
-            path="/anime"
-            element={
-              <HomePage newAniList={newAniList} suggestList={suggestList} />
-            }
-          />
+          >
+            <Route
+              path="anime"
+              element={
+                <HomePage newAniList={newAniList} suggestList={suggestList} />
+              }
+            />
+          </Route>
+
           <Route path="anime/details/:animeId" element={<Anime />} />
           <Route path="anime/watch/:animeId" element={<Player />} />
-          <Route path="anime/browse" element={<Browse />} />
+
+          <Route path="anime/browse/" element={<Browse />}>
+            <Route path=":category" element={<Browse />} />
+            <Route path=":ranking" element={<Browse />} />
+            <Route path=":new" element={<Browse />} />
+          </Route>
 
           <Route path="*" element={<_404Page />} />
         </Routes>
