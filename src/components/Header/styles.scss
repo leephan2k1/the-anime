@@ -75,7 +75,7 @@
       top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 1000;
+      z-index: 500;
       @include mobile {
         width: 60%;
       }
@@ -89,7 +89,7 @@
         background-color: $box-color;
         width: 100%;
         height: fit-content;
-        z-index: 1001;
+        z-index: 501;
         border-radius: 10px;
 
         padding: 10px;

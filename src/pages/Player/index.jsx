@@ -13,7 +13,7 @@ function Player(pops) {
   const navigate = useNavigate();
   const API = new ANIAPI.API("DUMMY_JWT");
   const plyrRef = useRef();
-  console.log("anime id >>>>>>>>>", animeId);
+  // console.log("anime id >>>>>>>>>", animeId);
 
   //call api
   useEffect(() => {
@@ -38,14 +38,22 @@ function Player(pops) {
           });
         } else {
           console.log("not found episode anime!!");
-          setAniUrl("Not found episode");
+          setAniUrl({
+            type: "video",
+            sources: [
+              {
+                src: "wBamxCpvkGU",
+                provider: "youtube",
+              },
+            ],
+          });
         }
       } catch (err) {
         console.log("fetch api fail error >>> ", err);
       }
     };
     fetchEpisode();
-    console.log(searchParams.get("index"));
+    // console.log(searchParams.get("index"));
     // Access the internal plyr instance
   }, []);
 
@@ -57,7 +65,6 @@ function Player(pops) {
     );
     let timeoutEvent;
     const handleEvent = () => {
-      console.log("test");
       backBtnDOM.style.cssText = "display: block";
       if (timeOutBackBtn.current) {
         clearTimeout(timeOutBackBtn.current);
@@ -75,6 +82,7 @@ function Player(pops) {
 
   return (
     <div className="animeZonePlayer d-flex justify-content-center">
+      {console.log(aniUrl)}
       <i
         onClick={() => {
           navigate(`/anime/details/${animeId}`);
@@ -85,7 +93,7 @@ function Player(pops) {
         ref={plyrRef}
         source={aniUrl}
         options={{
-          blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+          blankVideo: "https://youtu.be/at_oZEBRJMQ",
           autoplay: true,
           /* https://github.com/sampotts/plyr#options */
         }}

@@ -16,6 +16,7 @@ import { setSeasonBannerList } from "./app/listSlice";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Anime = lazy(() => import("./pages/Anime"));
+const _404Page = lazy(() => import("./pages/404Page"));
 
 function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -137,14 +138,8 @@ function App() {
           />
           <Route path="anime/details/:animeId" element={<Anime />} />
           <Route path="anime/watch/:animeId" element={<Player />} />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "5rem", fontSize: "10rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
+
+          <Route path="*" element={<_404Page />} />
         </Routes>
       </Suspense>
     </div>

@@ -12,8 +12,7 @@ export default function AnimeEpisode(props) {
       {data === "Not found episode" ? (
         <>
           <p className="animeEpisode__message">
-            Anime bạn muốn xem có thể là music video (Nhấn vào xem từ đầu) hoặc
-            chưa có sub, sin lũi - ごめんなさい!
+            Anime bạn muốn xem chưa có sub, sin lũi - ごめんなさい!
           </p>
           <img
             className="animeEpisode__notFound"
