@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import ANIAPI from "@mattplays/aniapi";
 import { remainMiddleElem } from "../../app/selectors";
 import MyLoader from "../MyLoader";
 import { headerLoaderSettings } from "../../settings";
@@ -7,11 +8,18 @@ import "./styles.scss";
 import "animate.css";
 //https://s4.anilist.co/file/anilistcdn/media/anime/banner/128547-aVWJmZz9dwJJ.jpg
 export default function Header() {
+  const API = new ANIAPI.API("DUMMY_JWT");
   const [urlBanner, setUrlBanner] = useState("");
   const [animeTitle, setAnimeTitle] = useState("");
   const [animeDesc, setanimeDesc] = useState("");
+  const [searchValues, setSearchValues] = useState("");
+  const [responseList, setResponseList] = useState([]);
+
+  const debounceTimes = useRef();
+
   const midElem = useSelector(remainMiddleElem);
 
+  //side Effect sync banner middle element
   useEffect(() => {
     if (midElem) {
       setUrlBanner(midElem.banner_image);
@@ -23,8 +31,66 @@ export default function Header() {
     }
   }, [midElem]);
 
+  //side Effect fetch api search filter
+  useEffect(() => {
+    const fetchSearchFilter = () => {
+      //clear timeout debounce before
+      if (debounceTimes.current) {
+        clearTimeout(debounceTimes.current);
+      }
+      console.log(searchValues);
+      debounceTimes.current = setTimeout(async () => {
+        try {
+          const response = await API.Anime.Get(
+            {
+              title: searchValues,
+            },
+            1,
+            10
+          );
+          console.log(response);
+          if (response.status_code === 200) {
+            setResponseList(response.data.documents);
+          } else {
+            setResponseList([]);
+          }
+        } catch (err) {
+          console.log("search failed with error: ", err);
+        }
+      }, 300);
+    };
+
+    fetchSearchFilter();
+  }, [searchValues]);
+
+  //side Effect active CSS response zone
+  useEffect(() => {
+    const responseUI = document.querySelector(".searchAnime__responseZone");
+    const searchInputDOM = document.querySelector(".searchAnime__input");
+    const handleStyleActive = () => {
+      responseUI.style.cssText = "display: block";
+    };
+    const handleStyleInactive = () => {
+      responseUI.style.cssText = "display: none";
+    };
+
+    searchInputDOM.addEventListener("focus", handleStyleActive);
+    searchInputDOM.addEventListener("blur", handleStyleInactive);
+
+    //clean up events
+    return () => {
+      searchInputDOM.removeEventListener("blur", handleStyleInactive);
+      searchInputDOM.removeEventListener("focus", handleStyleActive);
+    };
+  }, []);
+
+  const handleSearchTitle = (e) => {
+    setSearchValues(() => e.target.value);
+  };
+
   return (
-    <header className="header overflow-hidden">
+    <header className="header">
+      {/* {console.log(responseList)} */}
       {midElem ? (
         <div className="header__banner h-full d-flex justify-content-center">
           {animeTitle ? (
@@ -42,13 +108,22 @@ export default function Header() {
             {animeDesc}
           </p>
           <img className="header__banner-image" src={urlBanner} alt="banner" />
-          <div className="searchAnime absolute overflow-hidden d-flex">
+          <div className="searchAnime absolute  d-flex">
             <input
               className="searchAnime__input w-full h-full"
               type="text"
               name="searchAnime"
               placeholder="Nhập tên anime..."
+              value={searchValues}
+              onChange={handleSearchTitle}
             />
+            <div className="searchAnime__responseZone">
+              {responseList &&
+                responseList.length > 0 &&
+                responseList.map((e) => {
+                  return <p key={e.id}>{e.titles.en}</p>;
+                })}
+            </div>
             <i className="bi bi-search d-flex align-items-center"></i>
           </div>
         </div>

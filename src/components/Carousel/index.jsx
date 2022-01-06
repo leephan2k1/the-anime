@@ -17,6 +17,8 @@ function Carousel(props) {
   const sliderRef = useRef(null);
   const dispatch = useDispatch();
 
+  // console.log(data);
+
   if (carouselType === "carouselMain") {
     settings.afterChange = () => {
       handleMainCarouselCSS();
@@ -67,20 +69,24 @@ function Carousel(props) {
                   ) : (
                     <Card
                       imgSrc={customThumbnail || elem.cover_image}
-                      episode_count={elem.episodes_count || elem.number}
+                      episode_count={elem.episodes_count || index + 1}
                       episode_duration={elem.episode_duration}
                       id={elem.id}
                       typeCard={
-                        carouselType === "carouselSection"
+                        carouselType === "carouselSection" ||
+                        carouselType === "episodeSection"
                           ? "details"
                           : "notDetails"
                       }
                       title={
-                        carouselType === "carouselSection"
+                        carouselType === "carouselSection" ||
+                        carouselType === "episodeSection"
                           ? elem.titles?.en || `Tập ${index + 1}`
                           : null
                       }
-                      customCard={"categoryCard"}
+                      customCard={
+                        carouselType === "episodeSection" && "episodeCard"
+                      }
                     />
                   )}
                 </div>

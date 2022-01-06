@@ -13,6 +13,7 @@ function Player(pops) {
   const plyrRef = useRef();
   const timeOutBackBtn = useRef();
   const navigate = useNavigate();
+  console.log("anime id >>>>>>>>>", animeId);
 
   //call api
   useEffect(() => {

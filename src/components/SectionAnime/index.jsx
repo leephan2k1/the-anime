@@ -20,8 +20,6 @@ function SectionAnime(props) {
         dots: false,
       },
     };
-    // sectionCarouselSettings.responsive[0]?.settings?.infinite = false;
-    // sectionCarouselSettings.responsive[0]?.settings?.infinite = false;
   }
 
   return (
@@ -32,7 +30,9 @@ function SectionAnime(props) {
       </a>
       <Carousel
         settings={sectionCarouselSettings}
-        carouselType={"carouselSection"}
+        carouselType={
+          sectionType === "Episode" ? "episodeSection" : "carouselSection"
+        }
         data={data}
         customThumbnail={thumbnail}
       />

@@ -1,3 +1,4 @@
+@import "../../assets/styles/_variable.scss";
 @import "../../assets/styles/mixin";
 
 .header {
@@ -67,12 +68,6 @@
     .searchAnime {
       height: 40px;
       width: 30%;
-      @include mobile {
-        width: 60%;
-      }
-      @include tablet {
-        width: 50%;
-      }
       border-radius: 15px;
       background: rgba(255, 255, 255, 0.25);
       -webkit-backdrop-filter: blur(10px);
@@ -80,12 +75,39 @@
       top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 5;
+      z-index: 1000;
+      @include mobile {
+        width: 60%;
+      }
+      @include tablet {
+        width: 50%;
+      }
+      &__responseZone {
+        display: none;
+        top: 100%;
+        position: absolute;
+        background-color: $box-color;
+        width: 100%;
+        height: fit-content;
+        z-index: 1001;
+        border-radius: 10px;
+        color: #fff;
+        padding: 10px;
+        & > p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
       &__input {
         padding: 10px;
         border: none;
         z-index: 1;
         background: transparent;
+        &:focus {
+          color: #fff;
+        }
         &::placeholder {
           color: #333;
         }

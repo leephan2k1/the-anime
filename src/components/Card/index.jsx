@@ -2,13 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Card(props) {
-  const { imgSrc, episode_count, id, typeCard, title } = props;
+  const { imgSrc, episode_count, id, typeCard, title, customCard } = props;
+  let basePath;
+  const { animeId } = useParams();
+  // console.log(customCard);
+
+  if (customCard === "episodeCard") {
+    basePath = "/anime/watch";
+  } else {
+    basePath = "/anime/details";
+  }
+
+  // console.log(basePath);
   return (
     <Link
-      to={`/anime/details/${id}`}
+      to={`${basePath}/${
+        customCard === "episodeCard" ? `${animeId}` : `${id}`
+      }${customCard === "episodeCard" ? `?index=${episode_count}` : ""}`}
       className="cardContainer overflow-hidden position-relative"
     >
       <span className="cardContainer__episode position-absolute">
