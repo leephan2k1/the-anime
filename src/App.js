@@ -137,7 +137,6 @@ function App() {
           />
           <Route path="anime/details/:animeId" element={<Anime />} />
           <Route path="anime/watch/:animeId" element={<Player />} />
-
           <Route
             path="*"
             element={

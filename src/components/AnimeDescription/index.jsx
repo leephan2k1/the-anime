@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function AnimeDescription(props) {
   const { data, episode } = props;
-  console.log(episode);
+  // console.log(episode);
 
   //handle CSS
   useEffect(() => {

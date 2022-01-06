@@ -91,12 +91,19 @@
         height: fit-content;
         z-index: 1001;
         border-radius: 10px;
-        color: #fff;
+
         padding: 10px;
-        & > p {
+        &__item {
+          display: block;
+          min-width: 100%;
+          color: #fff;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          cursor: pointer;
+          &:hover {
+            color: $acive-color;
+          }
         }
       }
 

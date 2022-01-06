@@ -4,6 +4,8 @@ import ANIAPI from "@mattplays/aniapi";
 import { remainMiddleElem } from "../../app/selectors";
 import MyLoader from "../MyLoader";
 import { headerLoaderSettings } from "../../settings";
+import { Link } from "react-router-dom";
+
 import "./styles.scss";
 import "animate.css";
 //https://s4.anilist.co/file/anilistcdn/media/anime/banner/128547-aVWJmZz9dwJJ.jpg
@@ -38,7 +40,7 @@ export default function Header() {
       if (debounceTimes.current) {
         clearTimeout(debounceTimes.current);
       }
-      console.log(searchValues);
+      // console.log(searchValues);
       debounceTimes.current = setTimeout(async () => {
         try {
           const response = await API.Anime.Get(
@@ -48,7 +50,7 @@ export default function Header() {
             1,
             10
           );
-          console.log(response);
+          // console.log(response);
           if (response.status_code === 200) {
             setResponseList(response.data.documents);
           } else {
@@ -67,22 +69,31 @@ export default function Header() {
   useEffect(() => {
     const responseUI = document.querySelector(".searchAnime__responseZone");
     const searchInputDOM = document.querySelector(".searchAnime__input");
+    let preventImmediatelyHidden;
+
     const handleStyleActive = () => {
       responseUI.style.cssText = "display: block";
     };
     const handleStyleInactive = () => {
-      responseUI.style.cssText = "display: none";
+      preventImmediatelyHidden = setTimeout(() => {
+        responseUI.style.cssText = "display: none";
+      }, 100);
     };
 
-    searchInputDOM.addEventListener("focus", handleStyleActive);
-    searchInputDOM.addEventListener("blur", handleStyleInactive);
+    if (searchInputDOM) {
+      searchInputDOM.addEventListener("focus", handleStyleActive);
+      searchInputDOM.addEventListener("blur", handleStyleInactive);
+    }
 
     //clean up events
     return () => {
-      searchInputDOM.removeEventListener("blur", handleStyleInactive);
-      searchInputDOM.removeEventListener("focus", handleStyleActive);
+      if (searchInputDOM) {
+        searchInputDOM.removeEventListener("focus", handleStyleActive);
+        searchInputDOM.removeEventListener("blur", handleStyleInactive);
+      }
+      clearTimeout(preventImmediatelyHidden);
     };
-  }, []);
+  });
 
   const handleSearchTitle = (e) => {
     setSearchValues(() => e.target.value);
@@ -90,7 +101,6 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* {console.log(responseList)} */}
       {midElem ? (
         <div className="header__banner h-full d-flex justify-content-center">
           {animeTitle ? (
@@ -121,7 +131,15 @@ export default function Header() {
               {responseList &&
                 responseList.length > 0 &&
                 responseList.map((e) => {
-                  return <p key={e.id}>{e.titles.en}</p>;
+                  return (
+                    <Link
+                      className="searchAnime__responseZone__item"
+                      to={`/anime/details/${e.id}`}
+                      key={e.id}
+                    >
+                      {e.titles.en}
+                    </Link>
+                  );
                 })}
             </div>
             <i className="bi bi-search d-flex align-items-center"></i>

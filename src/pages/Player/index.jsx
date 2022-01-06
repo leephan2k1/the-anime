@@ -7,12 +7,12 @@ import "./styles.scss";
 
 function Player(pops) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const API = new ANIAPI.API("DUMMY_JWT");
-  const [aniUrl, setAniUrl] = useState();
   const { animeId } = useParams();
-  const plyrRef = useRef();
+  const [aniUrl, setAniUrl] = useState();
   const timeOutBackBtn = useRef();
   const navigate = useNavigate();
+  const API = new ANIAPI.API("DUMMY_JWT");
+  const plyrRef = useRef();
   console.log("anime id >>>>>>>>>", animeId);
 
   //call api
