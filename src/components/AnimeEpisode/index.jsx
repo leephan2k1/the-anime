@@ -22,6 +22,7 @@ export default function AnimeEpisode(props) {
         </>
       ) : (
         <SectionAnime
+          target={"#"}
           title={"Tập phim"}
           data={data.documents}
           thumbnail={thumbnail}

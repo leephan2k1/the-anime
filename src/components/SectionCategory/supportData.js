@@ -14,62 +14,62 @@ import yuriImg from "../../assets/images/yuri.jpeg";
 const arrayData = [
   {
     anilist_id: -1,
-    genre: "action",
+    genre: "Action",
     imgPath: actionImg,
   },
   {
     anilist_id: -2,
-    genre: "adventure",
+    genre: "Adventure",
     imgPath: adventureImg,
   },
   {
     anilist_id: -3,
-    genre: "comedy",
+    genre: "Comedy",
     imgPath: comedyImg,
   },
   {
     anilist_id: -4,
-    genre: "ecchi",
+    genre: "Ecchi",
     imgPath: ecchiImg,
   },
   {
     anilist_id: -6,
-    genre: "fantasy",
+    genre: "Fantasy",
     imgPath: fantasyImg,
   },
   {
     anilist_id: -7,
-    genre: "horror",
+    genre: "Horror",
     imgPath: horrorImg,
   },
   {
     anilist_id: -8,
-    genre: "isekai",
+    genre: "Isekai",
     imgPath: isekaiImg,
   },
   {
     anilist_id: -9,
-    genre: "music",
+    genre: "Music",
     imgPath: musicImg,
   },
   {
     anilist_id: -10,
-    genre: "romance",
+    genre: "Romance",
     imgPath: romanceImg,
   },
   {
     anilist_id: -11,
-    genre: "slice-of-life",
+    genre: "Slice Of Life",
     imgPath: sliceOfLifeImg,
   },
   {
     anilist_id: -12,
-    genre: "sports",
+    genre: "Sports",
     imgPath: sportsImg,
   },
   {
     anilist_id: -13,
-    genre: "yuri",
+    genre: "Yuri",
     imgPath: yuriImg,
   },
 ];

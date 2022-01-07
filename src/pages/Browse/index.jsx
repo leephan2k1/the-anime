@@ -1,12 +1,16 @@
 import ANIAPI from "@mattplays/aniapi";
+import { filter } from "app/selectors";
 import Card from "components/Card";
 import DropDown from "components/DropDown";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter } from "app/filtersSlice";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import "./styles.scss";
 import data from "./supportData";
+import { isEmptyObject, sleep } from "utils";
 
 function Browse(props) {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -18,11 +22,10 @@ function Browse(props) {
   const dataFlow = useRef({
     current_page: 1,
   });
-  const sleep = (delay) => {
-    let start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
-  };
+  const filterFromRedux = useSelector(filter);
+  const dispatch = useDispatch();
 
+  //update filters follow dropdown
   const triggerFilters = (key, value) => {
     setFilters((prev) => {
       if (value === "Tất cả") {
@@ -42,12 +45,15 @@ function Browse(props) {
     });
   };
 
+  //support first fetch
   const fetchData = async () => {
-    const response = await API.Anime.Get(filters, 1, 12);
-    console.log(filters);
-    return response.data?.documents;
+    // console.log(filters);
+    if (!isEmptyObject(filters)) {
+      const response = await API.Anime.Get(filters, 1, 12);
+      return response.data?.documents;
+    }
   };
-
+  //support infinite scroll
   const fetchMoreData = async () => {
     await sleep(200);
     const response = await API.Anime.Get(
@@ -71,6 +77,7 @@ function Browse(props) {
   //first fetch
   useEffect(() => {
     //reset when filters change
+
     setDataList([]);
     fetchData().then((value) => setDataList(value));
     dataFlow.current.current_page++;
@@ -81,7 +88,7 @@ function Browse(props) {
     const debounceFetch = async () => {
       await sleep(300);
       setFilters({
-        year: type === "new" ? 2022 : 2021,
+        year: type === "new" ? new Date().getFullYear() : 2021,
       });
     };
     debounceFetch();
@@ -100,11 +107,30 @@ function Browse(props) {
     if (searchFilter.length > 0) {
       searchTitleWithDebounce("title", searchFilter);
     } else {
-      console.log(searchFilter.length);
+      // console.log(searchFilter.length);
       triggerFilters("title", "Tất cả");
       triggerFilters("year", type === "new" ? 2022 : 2021);
     }
   }, [searchFilter]);
+
+  //read filters from redux
+  useEffect(() => {
+    const filter = filterFromRedux;
+    if (filter) {
+      if (!isNaN(filter)) {
+        triggerFilters("season", filter);
+        triggerFilters("year", "Tất cả");
+      } else {
+        triggerFilters("genres", filter);
+        triggerFilters("year", "Tất cả");
+      }
+    }
+
+    return () => {
+      //reset filter in redux
+      dispatch(setFilter(null));
+    };
+  }, []);
 
   return (
     <div className="browse w-full">

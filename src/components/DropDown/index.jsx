@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
 } from "reactstrap";
+import { useSelector } from "react-redux";
+import { filter } from "app/selectors";
+
 export default function DropDown(props) {
   const { title, listItem, id, triggerFunction } = props;
   const [toggleValue, setToggleValue] = useState(false);
   const [caretTitle, setCaretTitle] = useState(null);
+  const filterFromRedux = useSelector(filter);
 
   // console.log(id);
+
+  const covertSeasonStringToNumber = (season) => {
+    switch (season) {
+      case "Mùa Xuân":
+        return 1;
+      case "Mùa Hạ":
+        return 2;
+      case "Mùa Thu":
+        return 3;
+      case "Mùa Đông":
+        return 0;
+    }
+  };
 
   const handleToggleItems = () => {
     setToggleValue((prevState) => !prevState);
@@ -31,23 +48,10 @@ export default function DropDown(props) {
           triggerFunction("season", "Tất cả");
           break;
         }
-        //covert string to number
-        let seasonNumber;
-        switch (e.target.innerText) {
-          case "Mùa Xuân":
-            seasonNumber = 1;
-            break;
-          case "Mùa Hạ":
-            seasonNumber = 2;
-            break;
-          case "Mùa Thu":
-            seasonNumber = 3;
-            break;
-          case "Mùa Đông":
-            seasonNumber = 0;
-            break;
-        }
-        triggerFunction("season", seasonNumber);
+        triggerFunction(
+          "season",
+          covertSeasonStringToNumber(e.target.innerText)
+        );
         break;
       case 2:
         triggerFunction("genres", e.target.innerText);
@@ -62,6 +66,29 @@ export default function DropDown(props) {
         console.log("error dispatch");
     }
   };
+
+  //active content filter from redux
+  useEffect(() => {
+    const toggleBtnsDOM = document.querySelectorAll(".dropdown-toggle");
+    if (filterFromRedux) {
+      switch (filterFromRedux) {
+        case 0:
+          toggleBtnsDOM[1].innerText = "Mùa Đông";
+          break;
+        case 1:
+          toggleBtnsDOM[1].innerText = "Mùa Xuân";
+          break;
+        case 2:
+          toggleBtnsDOM[1].innerText = "Mùa Hạ";
+          break;
+        case 3:
+          toggleBtnsDOM[1].innerText = "Mùa Thu";
+          break;
+        default:
+          toggleBtnsDOM[2].innerText = filterFromRedux;
+      }
+    }
+  }, []);
 
   return (
     <Dropdown data-id={id} toggle={handleToggleItems} isOpen={toggleValue}>
