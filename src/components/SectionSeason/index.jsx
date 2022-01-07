@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Col, Container, Row } from "reactstrap";
 import { seasonBannerList } from "app/selectors";
 import Box from "components/Box";
 import MyLoader from "components/MyLoader";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Col, Container, Row } from "reactstrap";
 import { seasonSectionLoaderSettings } from "settings";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 
 function SectionSeason(props) {
+  const { target } = props;
   const data = useSelector(seasonBannerList);
   const [listSeason, setListSeason] = useState([]);
 
@@ -32,10 +34,10 @@ function SectionSeason(props) {
 
   return (
     <section className="section sectionSeason d-flex flex-column justify-content-center ">
-      <a href="#" className="section__title">
+      <Link to={target} className="section__title">
         Bộ sưu tập
         <i className="fas fa-chevron-right"></i>
-      </a>
+      </Link>
       <Container>
         <Row>
           {listSeason && listSeason.length

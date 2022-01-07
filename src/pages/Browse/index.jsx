@@ -1,33 +1,110 @@
 import ANIAPI from "@mattplays/aniapi";
+import Card from "components/Card";
 import DropDown from "components/DropDown";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import Card from "components/Card";
 import "./styles.scss";
 import data from "./supportData";
 
 function Browse(props) {
-  const params = useParams();
   const API = new ANIAPI.API("DUMMY_JWT");
-  // console.log(params);
+  const { type } = useParams();
+  const [dataList, setDataList] = useState([]);
+  const [filters, setFilters] = useState({});
+  const [searchFilter, setSearchFilter] = useState("");
+  const debounceTime = useRef();
+  const dataFlow = useRef({
+    current_page: 1,
+  });
+  const sleep = (delay) => {
+    let start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  };
 
-  //fetch API in filters
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await API.Anime.Get(
-  //       {
-  //         year: 2021,
-  //         season: 1,
-  //       },
-  //       1,
-  //       10
-  //     );
-  //     console.log(response);
-  //   };
+  const triggerFilters = (key, value) => {
+    setFilters((prev) => {
+      if (value === "Tất cả") {
+        delete prev[key];
+        return prev;
+      }
+      if (key === "formats") {
+        return { ...prev, [key]: [ANIAPI.ENUMS.AnimeFormat[value]] };
+      }
+      if (key === "status") {
+        return { ...prev, [key]: [ANIAPI.ENUMS.AnimeStatus[value]] };
+      }
+      if (key === "title") {
+        return { [key]: value };
+      }
+      return { ...prev, [key]: value };
+    });
+  };
 
-  //   fetchData();
-  // }, []);
+  const fetchData = async () => {
+    const response = await API.Anime.Get(filters, 1, 12);
+    console.log(filters);
+    return response.data?.documents;
+  };
+
+  const fetchMoreData = async () => {
+    await sleep(200);
+    const response = await API.Anime.Get(
+      filters,
+      dataFlow.current.current_page,
+      12
+    );
+    // console.log(response);
+    if (response.status_code === 200) {
+      setDataList((prev) => {
+        prev = prev.concat(response.data.documents);
+        const uniqueData = [...new Set(prev.map(JSON.stringify))].map(
+          JSON.parse
+        );
+        return uniqueData;
+      });
+      dataFlow.current.current_page++;
+    }
+  };
+
+  //first fetch
+  useEffect(() => {
+    //reset when filters change
+    setDataList([]);
+    fetchData().then((value) => setDataList(value));
+    dataFlow.current.current_page++;
+  }, [filters]);
+
+  //custom filters follow params
+  useEffect(() => {
+    const debounceFetch = async () => {
+      await sleep(300);
+      setFilters({
+        year: type === "new" ? 2022 : 2021,
+      });
+    };
+    debounceFetch();
+  }, [type]);
+
+  //debounce reduce call API
+  useEffect(() => {
+    const searchTitleWithDebounce = async (key, value) => {
+      if (debounceTime.current) {
+        clearTimeout(debounceTime.current);
+      }
+      debounceTime.current = setTimeout(() => {
+        triggerFilters("title", value);
+      }, 300);
+    };
+    if (searchFilter.length > 0) {
+      searchTitleWithDebounce("title", searchFilter);
+    } else {
+      console.log(searchFilter.length);
+      triggerFilters("title", "Tất cả");
+      triggerFilters("year", type === "new" ? 2022 : 2021);
+    }
+  }, [searchFilter]);
 
   return (
     <div className="browse w-full">
@@ -39,6 +116,8 @@ function Browse(props) {
               type="text"
               name="inputFilter"
               placeholder="Nhập tên anime..."
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(() => e.target.value)}
             />
             <i className="bi bi-search d-flex align-items-center justify-content-center"></i>
           </div>
@@ -62,6 +141,7 @@ function Browse(props) {
                     id={index}
                     title={elem.data[0]}
                     listItem={elem.data}
+                    triggerFunction={triggerFilters}
                   />
                 </Col>
               );
@@ -69,63 +149,39 @@ function Browse(props) {
         </Row>
       </Container>
 
-      <Container className="browse__animeCards w-full">
-        <Row>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
+      <Container id="scrollableDiv" className="browse__animeCards w-full">
+        {dataList && dataList.length > 0 && (
+          <InfiniteScroll
+            dataLength={dataList.length}
+            next={fetchMoreData}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            hasChildren={false}
           >
-            <Card />
-          </Col>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
-          >
-            <Card />
-          </Col>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
-          >
-            <Card />
-          </Col>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
-          >
-            <Card />
-          </Col>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
-          >
-            <Card />
-          </Col>
-          <Col
-            lg="2"
-            md="4"
-            sm="6"
-            xs="6"
-            className="d-flex flex-column align-items-center justify-content-center"
-          >
-            <Card />
-          </Col>
-        </Row>
+            <Row>
+              {dataList.map((e, index) => {
+                return (
+                  <Col
+                    key={e.anilist_id}
+                    lg="2"
+                    md="4"
+                    sm="6"
+                    xs="6"
+                    className="card-column d-flex flex-column align-items-center justify-content-center"
+                  >
+                    <Card
+                      id={e.id}
+                      typeCard={"details"}
+                      imgSrc={e.cover_image}
+                      episode_count={e.episodes_count}
+                      title={e.titles.en || e.titles.jp}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
+          </InfiniteScroll>
+        )}
       </Container>
     </div>
   );

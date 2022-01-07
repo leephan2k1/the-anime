@@ -22,7 +22,7 @@ function Card(props) {
       to={`${basePath}/${
         customCard === "episodeCard" ? `${animeId}` : `${id}`
       }${customCard === "episodeCard" ? `?index=${episode_count}` : ""}`}
-      className="cardContainer overflow-hidden position-relative"
+      className="cardContainer position-relative"
     >
       <span className="cardContainer__episode position-absolute">
         {episode_count}

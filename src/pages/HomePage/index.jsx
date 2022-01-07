@@ -20,10 +20,18 @@ function HomePage(props) {
         carouselType={"carouselMain"}
         data={data}
       />
-      <SectionAnime title={"Anime mới cập nhật"} data={newAniList} />
-      <SectionSeason />
-      <SectionAnime title={"Hôm nay xem gì?"} data={suggestList} />
-      <SectionCategory title={"Thể loại"} />
+      <SectionAnime
+        target={"/anime/browse/new"}
+        title={"Anime mới cập nhật"}
+        data={newAniList}
+      />
+      <SectionSeason target={"/anime/browse/category"} />
+      <SectionAnime
+        target={"/anime/browse/category"}
+        title={"Hôm nay xem gì?"}
+        data={suggestList}
+      />
+      <SectionCategory title={"Thể loại"} target={"/anime/browse/category"} />
       {/* <Outlet /> */}
     </div>
   );

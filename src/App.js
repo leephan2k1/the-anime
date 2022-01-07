@@ -142,9 +142,7 @@ function App() {
           <Route path="anime/watch/:animeId" element={<Player />} />
 
           <Route path="anime/browse/" element={<Browse />}>
-            <Route path=":category" element={<Browse />} />
-            <Route path=":ranking" element={<Browse />} />
-            <Route path=":new" element={<Browse />} />
+            <Route path=":type" element={<Browse />} />
           </Route>
 
           <Route path="*" element={<_404Page />} />

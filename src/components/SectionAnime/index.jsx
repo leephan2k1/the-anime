@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { sectionCarouselSettings } from "settings";
+import { Link } from "react-router-dom";
 import Carousel from "../Carousel";
 import "./styles.scss";
 
 function SectionAnime(props) {
-  const { title, data, thumbnail, sectionType } = props;
+  const { title, data, thumbnail, sectionType, target } = props;
 
   //configure 4 AnimeEpisode Component
   if (sectionType === "Episode") {
@@ -24,10 +25,10 @@ function SectionAnime(props) {
 
   return (
     <section className="section w-full d-flex flex-column">
-      <a href="#" className="section__title">
+      <Link to={target} className="section__title">
         {title}
         <i className="fas fa-chevron-right"></i>
-      </a>
+      </Link>
       <Carousel
         settings={sectionCarouselSettings}
         carouselType={

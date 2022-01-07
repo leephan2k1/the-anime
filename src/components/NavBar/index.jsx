@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { Container } from "reactstrap";
 import "./styles.scss";
 
 export default function NavBar() {
@@ -29,53 +30,47 @@ export default function NavBar() {
 
   return (
     <nav className="navBar w-full d-flex align-items-center">
-      <NavLink
-        className="navBar__logo h-full d-flex justify-content-center align-items-center"
-        to="/"
-      >
-        Anime Zone
-      </NavLink>
+      <Container className="w-full h-full d-flex justify-content-around">
+        <NavLink
+          className="navBar__logo h-full d-flex justify-content-center align-items-center"
+          to="/"
+        >
+          Anime Zone
+        </NavLink>
 
-      <ul className="navBar__list justify-content-between align-items-center h-full">
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Trang chủ
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/anime/browse/ranking"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Bảng xếp hạng
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/anime/browse/category"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Thể loại
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/anime/browse/new"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Mới nhất
-          </NavLink>
-        </li>
-      </ul>
-      <div className="navBar__right-wrapper d-flex justify-content-center align-items-center">
-        <div className="user h-full d-flex align-items-center">
-          <i className="bi bi-list me-4"></i>
-          <i className="bi bi-person-circle"></i>
+        <ul className="navBar__list justify-content-evenly align-items-center h-full">
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Trang chủ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/anime/browse/category"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Thể loại
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/anime/browse/new"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Mới nhất
+            </NavLink>
+          </li>
+        </ul>
+        <div className="navBar__right-wrapper d-flex justify-content-center align-items-center">
+          <div className="user h-full d-flex align-items-center">
+            <i className="bi bi-list me-4"></i>
+            <i className="bi bi-person-circle"></i>
+          </div>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }

@@ -1,12 +1,4 @@
-import {
-  setFormats,
-  setGenres,
-  setSeason,
-  setStatus,
-  setYear,
-} from "app/filtersSlice";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import {
   Dropdown,
   DropdownItem,
@@ -14,10 +6,10 @@ import {
   DropdownToggle,
 } from "reactstrap";
 export default function DropDown(props) {
-  const { title, listItem, id } = props;
+  const { title, listItem, id, triggerFunction } = props;
   const [toggleValue, setToggleValue] = useState(false);
   const [caretTitle, setCaretTitle] = useState(null);
-  const dispatch = useDispatch();
+
   // console.log(id);
 
   const handleToggleItems = () => {
@@ -28,19 +20,43 @@ export default function DropDown(props) {
     setCaretTitle(e.target.innerText);
     switch (+e.target.closest(".dropdown").dataset.id) {
       case 0:
-        dispatch(setYear(+e.target.innerText));
+        if (e.target.innerText === "Tất cả") {
+          triggerFunction("year", "Tất cả");
+        } else {
+          triggerFunction("year", +e.target.innerText);
+        }
         break;
       case 1:
-        dispatch(setSeason(e.target.innerText));
+        if (e.target.innerText === "Tất cả") {
+          triggerFunction("season", "Tất cả");
+          break;
+        }
+        //covert string to number
+        let seasonNumber;
+        switch (e.target.innerText) {
+          case "Mùa Xuân":
+            seasonNumber = 1;
+            break;
+          case "Mùa Hạ":
+            seasonNumber = 2;
+            break;
+          case "Mùa Thu":
+            seasonNumber = 3;
+            break;
+          case "Mùa Đông":
+            seasonNumber = 0;
+            break;
+        }
+        triggerFunction("season", seasonNumber);
         break;
       case 2:
-        dispatch(setGenres(e.target.innerText));
+        triggerFunction("genres", e.target.innerText);
         break;
       case 3:
-        dispatch(setStatus(e.target.innerText));
+        triggerFunction("status", e.target.innerText);
         break;
       case 4:
-        dispatch(setFormats(e.target.innerText));
+        triggerFunction("formats", e.target.innerText);
         break;
       default:
         console.log("error dispatch");

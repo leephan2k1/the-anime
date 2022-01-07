@@ -31,15 +31,6 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/anime/browse/ranking"
-            className={({ isActive }) => (isActive ? "active" : "")}
-            onClick={() => handleCSSsideBar()}
-          >
-            Bảng xếp hạng
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/anime/browse/category"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
