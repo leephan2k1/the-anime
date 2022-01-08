@@ -5,14 +5,15 @@ import {
   DropdownMenu,
   DropdownToggle,
 } from "reactstrap";
+import { seasons } from "constants/season";
 
 export default function DropDown(props) {
   const { title, listItem, id, triggerFunction, filterFromRedux } = props;
   const [toggleValue, setToggleValue] = useState(false);
   const [caretTitle, setCaretTitle] = useState(title);
-  const seasons = ["Mùa Đông", "Mùa Xuân", "Mùa Hạ", "Mùa Thu"];
-  // console.log(id);
-  // console.log(`${title} ${id}`);
+
+  // console.log(seasons[filterFromRedux]);
+
   const covertSeasonStringToNumber = (season) => {
     return seasons.indexOf(season);
   };
@@ -50,33 +51,35 @@ export default function DropDown(props) {
       case 4:
         triggerFunction("formats", e.target.innerText);
         break;
+      case 5:
+        triggerFunction("sort", e.target.innerText);
+        break;
       default:
         console.log("error dispatch");
     }
   };
 
+  //sync filter from homepage
   useEffect(() => {
-    //season filed
-    if (id === 1 && !isNaN(filterFromRedux)) {
-      // console.log(seasons[filterFromRedux]);
-      setCaretTitle(seasons[filterFromRedux]);
-    } else {
-      setCaretTitle(title);
+    if (filterFromRedux) {
+      switch (id) {
+        case 1:
+          if (seasons[filterFromRedux]) setCaretTitle(seasons[filterFromRedux]);
+          break;
+        case 2:
+          if (isNaN(filterFromRedux)) {
+            setCaretTitle(filterFromRedux);
+          }
+          break;
+        default:
+          setCaretTitle(title);
+      }
     }
-
-    //genres field
-    if (id === 2 && isNaN(filterFromRedux)) {
-      setCaretTitle(filterFromRedux);
-    } else {
-      setCaretTitle(title);
-    }
-
-    return () => {};
   }, []);
 
   return (
     <Dropdown data-id={id} toggle={handleToggleItems} isOpen={toggleValue}>
-      {/* {console.log(caretTitle)} */}
+      {/* {console.log(id, " - ", caretTitle)} */}
       <DropdownToggle caret>{caretTitle}</DropdownToggle>
       <DropdownMenu>
         {listItem &&

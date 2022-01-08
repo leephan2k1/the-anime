@@ -6,8 +6,8 @@ import DropDown from "components/DropDown";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Container, Row } from "reactstrap";
 import { useParams } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 import { isEmptyObject, sleep } from "utils";
 import "./styles.scss";
 import data from "./supportData";
@@ -32,7 +32,7 @@ function Browse() {
     setFilters((prev) => {
       if (value === "Tất cả") {
         delete prev[key];
-        return prev;
+        return { ...prev };
       }
       if (key === "formats") {
         return { ...prev, [key]: [ANIAPI.ENUMS.AnimeFormat[value]] };
@@ -45,11 +45,17 @@ function Browse() {
       }
       return { ...prev, [key]: value };
     });
+    if (key === "sort" && value === "score") {
+      setDataList((prev) => {
+        return prev.sort((a, b) => (a.score < b.score ? 1 : -1));
+      });
+    }
   };
 
   const fetchData = async () => {
     // console.log(`render lan ${checkRender.current}`, filters);
     // checkRender.current++;
+    // console.log(filters);
     if (!isEmptyObject(filters)) {
       const response = await API.Anime.Get(filters, 1, 12);
       // console.log(response);

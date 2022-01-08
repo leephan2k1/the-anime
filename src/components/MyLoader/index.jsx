@@ -9,8 +9,8 @@ const MyLoader = (props) => {
       width={stloader?.width}
       height={stloader?.height}
       viewBox={stloader?.viewBox}
-      backgroundColor="#f3f3f3"
-      foregroundColor="#d6d6d6"
+      backgroundColor="#1f2123"
+      foregroundColor="#5d6468"
       {...props}
     >
       <rect x="0" y="0" rx="2" ry="2" width="2400" height="450" />
