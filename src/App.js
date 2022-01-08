@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar";
 import Player from "./pages/Player";
 
 import { Suspense, lazy, useState, useEffect } from "react";
+import CustomRoute from "components/CustomRoute";
 import { Route, Routes } from "react-router-dom";
 
 import ANIAPI from "@mattplays/aniapi";
@@ -124,7 +125,7 @@ function App() {
       <NavBar />
       <SideBar handleEffectSideBar={handleEffectSideBar} />
       <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
+        <CustomRoute>
           <Route
             path="/"
             element={
@@ -147,7 +148,7 @@ function App() {
           </Route>
 
           <Route path="*" element={<_404Page />} />
-        </Routes>
+        </CustomRoute>
       </Suspense>
     </div>
   );
