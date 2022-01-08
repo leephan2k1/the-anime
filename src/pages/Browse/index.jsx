@@ -47,7 +47,7 @@ function Browse() {
     });
     if (key === "sort" && value === "score") {
       setDataList((prev) => {
-        return prev.sort((a, b) => (a.score < b.score ? 1 : -1));
+        return prev.sort((a, b) => (a.score < b.score ? -1 : 1));
       });
     }
   };

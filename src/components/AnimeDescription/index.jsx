@@ -105,7 +105,8 @@ export default function AnimeDescription(props) {
 
           {data.descriptions ? (
             <p className="desc__details">
-              {data.descriptions.en || data.descriptions.it}
+              {data.descriptions.en?.replace(/<\/?[^>]+(>|$)/g, "") ||
+                data.descriptions.it?.replace(/<\/?[^>]+(>|$)/g, "")}
             </p>
           ) : (
             <ContentLoader
