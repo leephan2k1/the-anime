@@ -5,28 +5,16 @@ import {
   DropdownMenu,
   DropdownToggle,
 } from "reactstrap";
-import { useSelector } from "react-redux";
-import { filter } from "app/selectors";
 
 export default function DropDown(props) {
-  const { title, listItem, id, triggerFunction } = props;
+  const { title, listItem, id, triggerFunction, filterFromRedux } = props;
   const [toggleValue, setToggleValue] = useState(false);
-  const [caretTitle, setCaretTitle] = useState(null);
-  const filterFromRedux = useSelector(filter);
-
+  const [caretTitle, setCaretTitle] = useState(title);
+  const seasons = ["Mùa Đông", "Mùa Xuân", "Mùa Hạ", "Mùa Thu"];
   // console.log(id);
-
+  // console.log(`${title} ${id}`);
   const covertSeasonStringToNumber = (season) => {
-    switch (season) {
-      case "Mùa Xuân":
-        return 1;
-      case "Mùa Hạ":
-        return 2;
-      case "Mùa Thu":
-        return 3;
-      case "Mùa Đông":
-        return 0;
-    }
+    return seasons.indexOf(season);
   };
 
   const handleToggleItems = () => {
@@ -34,11 +22,11 @@ export default function DropDown(props) {
   };
   const handleClickItem = (e) => {
     // console.log(typeof e.target.closest(".dropdown").dataset.id);
-    setCaretTitle(e.target.innerText);
+    setCaretTitle(() => e.target.innerText);
     switch (+e.target.closest(".dropdown").dataset.id) {
       case 0:
         if (e.target.innerText === "Tất cả") {
-          triggerFunction("year", "Tất cả");
+          triggerFunction("year", 2021);
         } else {
           triggerFunction("year", +e.target.innerText);
         }
@@ -67,32 +55,29 @@ export default function DropDown(props) {
     }
   };
 
-  //active content filter from redux
   useEffect(() => {
-    const toggleBtnsDOM = document.querySelectorAll(".dropdown-toggle");
-    if (filterFromRedux) {
-      switch (filterFromRedux) {
-        case 0:
-          toggleBtnsDOM[1].innerText = "Mùa Đông";
-          break;
-        case 1:
-          toggleBtnsDOM[1].innerText = "Mùa Xuân";
-          break;
-        case 2:
-          toggleBtnsDOM[1].innerText = "Mùa Hạ";
-          break;
-        case 3:
-          toggleBtnsDOM[1].innerText = "Mùa Thu";
-          break;
-        default:
-          toggleBtnsDOM[2].innerText = filterFromRedux;
+    //season filed
+    if (id === 1 && filterFromRedux !== null) {
+      if (!isNaN(filterFromRedux)) {
+        setCaretTitle(seasons[filterFromRedux]);
+      } else {
+        setCaretTitle(title);
       }
     }
+    //genres field
+    if (id === 2 && isNaN(filterFromRedux)) {
+      setCaretTitle(filterFromRedux);
+    } else {
+      setCaretTitle(title);
+    }
+
+    return () => {};
   }, []);
 
   return (
     <Dropdown data-id={id} toggle={handleToggleItems} isOpen={toggleValue}>
-      <DropdownToggle caret>{caretTitle || title}</DropdownToggle>
+      {/* {console.log(caretTitle)} */}
+      <DropdownToggle caret>{caretTitle}</DropdownToggle>
       <DropdownMenu>
         {listItem &&
           listItem.map((e, idx) => {
