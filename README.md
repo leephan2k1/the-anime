@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Project Anime Zone v1.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project được build bởi [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Tech stack:
 
-In the project directory, you can run:
+- ReactJS
+- React-infinite-scroll-component
+- React Router V6
+- Redux toolkit
+- Reactstrap + Bootstrap 5
+- Slick-carousel
+- Plyr.io
+- Axios
+- @mattplays/aniapi
 
-### `npm start`
+### Suporrt API by AniAPI ❤
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[AniAPI](https://aniapi.com/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Hãy tặng cho AniAPI một star nếu bạn có thể:
 
-### `npm test`
+[AniAPI Githhub](https://github.com/AniAPI-Team/AniAPI)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tính năng cơ bản Anime Zone v1.0
 
-### `npm run build`
+- Lướt các đề xuất anime ở home page.
+- Chọn filter season anime trên home page.
+- Chọn filter genres anime trên home page.
+- Xem anime format .mp4 **(Do API của các bạn nước ngoài làm nên chỉ là EngSub)**
+- Tìm kiếm anime ở home page hoặc browse page.
+- Lọc anime theo filter ở home page.
+- Xem anime mới nhất ở browse page cấu hình theo param.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tính năng dự định phát triển thêm:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Login với Firebase.
+2. Trang login.
+3. Trang danh sách xếp hạng.
+4. Trang đánh giá.
+5. (Xa hơn) training thêm ExpressJS + MongoDB lưu blog anime.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tham khảo
 
-### `npm run eject`
+- Stackoverflow
+- React router docs
+- UI Netflix
+- UI & Event [KaguyaAnime](www.kaguya.live) (Thank you a lot if you read this post! :3).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Lời ngỏ
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+_Đây là project đầu tiên tổng hợp các kiến thức về ReactJS mình học hỏi trên internet nên chắc chắn code không thể clean và logic còn phức tạp (Mình có dự định sẽ dev đến khi hoàn thiện). Nếu bạn thấy có thể optimize về UI hoặc logic, phát hiện bug - errors, hãy liên hệ với mình:
+[Lee Phan (Triết Lý)](https://www.facebook.com/leephan2001/)
+Mình sẵn sàng welcome và học hỏi thêm bất cứ thứ gì ❤_
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Giao diện desktop Anime Zone v1.0
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### - Home Page:
 
-## Learn More
+![Homepage](https://drive.google.com/uc?export=view&id=179b4r-TTI6cCUUhimDq93J8MorA3mCEU)
+![homepage-category](https://drive.google.com/uc?export=view&id=1MKH90TSq7_8w1vghJQXS5Qk8IAd1alZb)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### - Detais Page:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![detailspage-up](https://drive.google.com/uc?export=view&id=1gXrmoAY1N-OzHUoxVfHvvuUHc-ipvdCT)
+![detailspage-down](https://drive.google.com/uc?export=view&id=10VDnCHPYfR4CDJfiUxijmvLLie9UnMak)
 
-### Code Splitting
+### - Browse Page:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![browsepage](https://drive.google.com/uc?export=view&id=15z4maCGMtZMOpjcVu8yYZB_xtzs3UTfO)
 
-### Analyzing the Bundle Size
+### - 404 Page:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![404page](https://drive.google.com/uc?export=view&id=1OV2Bfn_mkz3yvU1zbyPI15Tf8GlAXAFk)
 
-### Making a Progressive Web App
+### - Player Page:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![player page](https://drive.google.com/uc?export=view&id=1spMN0Bxe7W-HXAPi9hc5EfcvpVbEUu8e)
 
-### Advanced Configuration
+## Giao diện mobile Anime Zone v1.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### - Home Page:
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![homepage](https://drive.google.com/uc?export=view&id=1uxc_e_ahDch-vn0IIunxxBxNmghrluvh)
