@@ -93,7 +93,7 @@ export default function Header() {
       }
       clearTimeout(preventImmediatelyHidden);
     };
-  });
+  }, []);
 
   const handleSearchTitle = (e) => {
     setSearchValues(() => e.target.value);
