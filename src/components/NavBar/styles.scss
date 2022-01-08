@@ -3,7 +3,7 @@
 
 .navBar {
   height: 80px;
-  overflow: hidden;
+  // overflow: hidden;
   font-size: 1.6rem;
   z-index: 550;
   justify-content: space-around;
@@ -65,9 +65,29 @@
     }
   }
   .user {
+    position: relative;
     .bi-person-circle {
+      cursor: pointer;
       color: $icon-color;
       font-size: 4rem;
+    }
+    &__dropdown {
+      color: #fff;
+      display: none;
+      position: absolute;
+      top: 84%;
+      right: -25%;
+      width: 130px;
+      height: 70px;
+      border-radius: 10px;
+      transition: all 0.5s;
+      background-color: #ff6347ce;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
   }
 }

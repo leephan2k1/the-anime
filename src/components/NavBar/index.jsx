@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./styles.scss";
+import "animate.css";
 
 export default function NavBar() {
   const [isActive, setActive] = useState(false);
+  const [toggleUser, setToggleUser] = useState(false);
 
   //Active css scroll
   useEffect(() => {
@@ -28,6 +30,15 @@ export default function NavBar() {
     };
   }, [isActive]);
 
+  const activeUser = () => {
+    const userDropDownDOM = document.querySelector(".user__dropdown");
+    if (!toggleUser) {
+      userDropDownDOM.style.cssText = "display: flex";
+    } else {
+      userDropDownDOM.style.cssText = "display: none";
+    }
+    setToggleUser((prev) => !prev);
+  };
   return (
     <nav className="navBar w-full d-flex align-items-center">
       <Container className="w-full h-full d-flex justify-content-around">
@@ -57,7 +68,7 @@ export default function NavBar() {
           </li>
           <li>
             <NavLink
-              to={`/anime/browse/new`}
+              to="/anime/browse/new"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Mới nhất
@@ -67,7 +78,12 @@ export default function NavBar() {
         <div className="navBar__right-wrapper d-flex justify-content-center align-items-center">
           <div className="user h-full d-flex align-items-center">
             <i className="bi bi-list me-4"></i>
-            <i className="bi bi-person-circle"></i>
+            <i className="bi bi-person-circle" onClick={activeUser}></i>
+            <div className="user__dropdown justify-content-center align-items-center">
+              <span className="animate__animated animate__fadeIn animate__infinite">
+                Đang phát triển...
+              </span>
+            </div>
           </div>
         </div>
       </Container>
