@@ -57,7 +57,7 @@ export default function NavBar() {
           </li>
           <li>
             <NavLink
-              to="/anime/browse/new"
+              to={`/anime/browse/new`}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Mới nhất

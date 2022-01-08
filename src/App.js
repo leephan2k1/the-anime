@@ -23,6 +23,7 @@ function App() {
   const [newAniList, setNewAniList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
   const [toggleSideBar, setToggleSideBar] = useState(true);
+
   const dispatch = useDispatch();
 
   //call api 4 homepage

@@ -6,15 +6,14 @@ import DropDown from "components/DropDown";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
+import { useParams } from "react-router-dom";
 import { isEmptyObject, sleep } from "utils";
 import "./styles.scss";
 import data from "./supportData";
 
-function Browse(props) {
+function Browse() {
   const API = new ANIAPI.API("DUMMY_JWT");
-  const { type } = useParams();
   const [dataList, setDataList] = useState([]);
   const [filters, setFilters] = useState({});
   const [searchFilter, setSearchFilter] = useState("");
@@ -24,14 +23,16 @@ function Browse(props) {
   });
   const filterFromRedux = useSelector(filter);
   const dispatch = useDispatch();
+  // const checkRender = useRef(0);
+  const { type } = useParams();
 
+  // console.log(type);
   //update filters follow dropdown
   const triggerFilters = (key, value) => {
     setFilters((prev) => {
       if (value === "Tất cả") {
         delete prev[key];
-        //make sure always have data
-        return { ...prev, year: 2021 };
+        return prev;
       }
       if (key === "formats") {
         return { ...prev, [key]: [ANIAPI.ENUMS.AnimeFormat[value]] };
@@ -46,25 +47,12 @@ function Browse(props) {
     });
   };
 
-  //support first fetch
-
   const fetchData = async () => {
-    // console.log(filters);
-    // console.log(filterFromRedux);
-    if (filterFromRedux) {
-      if (!isNaN(filterFromRedux)) {
-        filters.season = filterFromRedux;
-        // triggerFilters("year", "Tất cả");
-        // triggerFilters("season", filter);
-      } else {
-        filters.genres = filterFromRedux;
-        // triggerFilters("year", "Tất cả");
-        // triggerFilters("genres", filter);
-      }
-    }
-    // console.log(filters);
+    // console.log(`render lan ${checkRender.current}`, filters);
+    // checkRender.current++;
     if (!isEmptyObject(filters)) {
       const response = await API.Anime.Get(filters, 1, 12);
+      // console.log(response);
       return response.data?.documents;
     }
   };
@@ -97,17 +85,6 @@ function Browse(props) {
     dataFlow.current.current_page++;
   }, [filters]);
 
-  //custom filters follow params
-  useEffect(() => {
-    const debounceFetch = async () => {
-      await sleep(300);
-      setFilters({
-        year: type === "new" ? new Date().getFullYear() : 2021,
-      });
-    };
-    debounceFetch();
-  }, [type]);
-
   //debounce reduce call API
   useEffect(() => {
     const searchTitleWithDebounce = async (key, value) => {
@@ -123,17 +100,29 @@ function Browse(props) {
     } else {
       //reset filter when empty input
       triggerFilters("title", "Tất cả");
-      triggerFilters("year", type === "new" ? 2022 : 2021);
+      triggerFilters("year", type === "new" ? new Date().getFullYear() : 2021);
     }
   }, [searchFilter]);
 
   //reset filter in redux
   useEffect(() => {
-    dispatch(setFilter(null));
+    // console.log("re-render");
+    if (filterFromRedux) {
+      if (!isNaN(filterFromRedux)) {
+        triggerFilters("season", filterFromRedux);
+      } else {
+        triggerFilters("genres", filterFromRedux);
+      }
+    }
+    if (type === "new") {
+      triggerFilters("year", new Date().getFullYear());
+    } else {
+      triggerFilters("year", new Date().getFullYear() - 1);
+    }
     return () => {
       dispatch(setFilter(null));
     };
-  }, []);
+  }, [type]);
 
   return (
     <div className="browse w-full">
@@ -178,7 +167,6 @@ function Browse(props) {
             })}
         </Row>
       </Container>
-
       <Container id="scrollableDiv" className="browse__animeCards w-full">
         {dataList && dataList.length > 0 && (
           <InfiniteScroll

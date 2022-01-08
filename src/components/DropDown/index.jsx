@@ -57,13 +57,13 @@ export default function DropDown(props) {
 
   useEffect(() => {
     //season filed
-    if (id === 1 && filterFromRedux !== null) {
-      if (!isNaN(filterFromRedux)) {
-        setCaretTitle(seasons[filterFromRedux]);
-      } else {
-        setCaretTitle(title);
-      }
+    if (id === 1 && !isNaN(filterFromRedux)) {
+      // console.log(seasons[filterFromRedux]);
+      setCaretTitle(seasons[filterFromRedux]);
+    } else {
+      setCaretTitle(title);
     }
+
     //genres field
     if (id === 2 && isNaN(filterFromRedux)) {
       setCaretTitle(filterFromRedux);
