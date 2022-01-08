@@ -28,7 +28,7 @@ export default function Header() {
       setAnimeTitle(midElem.titles.en);
       setanimeDesc(() => {
         const validDesc = midElem.descriptions.en || midElem.descriptions.it;
-        return validDesc;
+        return validDesc?.replace(/<\/?[^>]+(>|$)/g, "");
       });
     }
   }, [midElem]);
