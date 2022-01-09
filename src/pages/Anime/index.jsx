@@ -38,6 +38,11 @@ export default function Anime(props) {
       }
     };
     fetchAnime();
+
+    return () => {
+      setAnimeDetails({});
+      setEpisode({});
+    };
   }, []);
 
   return (
