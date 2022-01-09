@@ -14,7 +14,7 @@ Project được build bởi [Create React App](https://github.com/facebook/crea
 - Axios
 - @mattplays/aniapi
 
-### Suporrt API by AniAPI ❤
+### Support API by AniAPI ❤
 
 [AniAPI](https://aniapi.com/)
 
