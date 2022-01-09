@@ -22,7 +22,9 @@ function Player(pops) {
       try {
         const responseEpisode = await API.Episode.Get({
           anime_id: animeId,
+          locale: "it",
         });
+        console.log(responseEpisode);
         if (responseEpisode.status_code === 200) {
           const url =
             responseEpisode.data.documents[+searchParams.get("index") - 1]
@@ -82,7 +84,7 @@ function Player(pops) {
 
   return (
     <div className="animeZonePlayer d-flex justify-content-center">
-      {console.log(aniUrl)}
+      {/* {console.log(aniUrl)} */}
       <i
         onClick={() => {
           navigate(`/anime/details/${animeId}`);
