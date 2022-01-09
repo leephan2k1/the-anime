@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setFilter } from "app/filtersSlice";
+import { browsePagePath } from "constants/path";
 
 function Box(props) {
   const { title, imgUrl, classNames, children } = props;
@@ -27,7 +28,7 @@ function Box(props) {
       default:
         dispatch(setFilter(title));
     }
-    navigate("/anime/browse/category");
+    navigate(`${browsePagePath}/category`);
   };
 
   return (

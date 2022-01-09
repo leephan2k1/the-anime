@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { homePagePath, browsePagePath } from "constants/path";
 import "./styles.scss";
 
 export default function SideBar(props) {
@@ -15,14 +16,14 @@ export default function SideBar(props) {
     <nav className="sideBar flex-column justify-content-start">
       <NavLink
         className="sideBar__logo d-flex justify-content-center align-items-center"
-        to="/"
+        to={`${homePagePath}`}
       >
         Anime Zone
       </NavLink>
       <ul className="sideBar__list d-flex flex-column justify-content-start align-items-center h-full">
         <li>
           <NavLink
-            to="/"
+            to={`${homePagePath}`}
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >
@@ -31,7 +32,7 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/anime/browse/category"
+            to={`${browsePagePath}/category`}
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >
@@ -40,7 +41,7 @@ export default function SideBar(props) {
         </li>
         <li>
           <NavLink
-            to="/anime/browse/new"
+            to={`${browsePagePath}/new`}
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => handleCSSsideBar()}
           >

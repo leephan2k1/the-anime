@@ -1,4 +1,4 @@
-export const homePage = "/";
-export const browsePage = "/anime/browse";
-export const playerPage = "/anime/watch";
-export const detailsPage = "/anime/details";
+export const homePagePath = "/";
+export const browsePagePath = "anime/browse";
+export const playerPagePath = "anime/watch";
+export const detailsPagePath = "anime/details";

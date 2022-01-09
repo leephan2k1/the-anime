@@ -9,6 +9,8 @@ import SectionAnime from "../../components/SectionAnime";
 import SectionCategory from "../../components/SectionCategory";
 import SectionSeason from "../../components/SectionSeason";
 
+import { browsePagePath } from "constants/path";
+
 function HomePage(props) {
   const data = useSelector(homeList);
   const { newAniList, suggestList } = props;
@@ -21,17 +23,20 @@ function HomePage(props) {
         data={data}
       />
       <SectionAnime
-        target={"/anime/browse/new"}
+        target={`${browsePagePath}/new`}
         title={"Anime mới cập nhật"}
         data={newAniList}
       />
-      <SectionSeason target={"/anime/browse/category"} />
+      <SectionSeason target={`${browsePagePath}/category`} />
       <SectionAnime
-        target={"/anime/browse/category"}
+        target={`${browsePagePath}/category`}
         title={"Hôm nay xem gì?"}
         data={suggestList}
       />
-      <SectionCategory title={"Thể loại"} target={"/anime/browse/category"} />
+      <SectionCategory
+        title={"Thể loại"}
+        target={`${browsePagePath}/category`}
+      />
       {/* <Outlet /> */}
     </div>
   );

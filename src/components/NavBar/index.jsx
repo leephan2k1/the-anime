@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./styles.scss";
 import "animate.css";
+import { browsePagePath, homePagePath } from "constants/path";
 
 export default function NavBar() {
   const [isActive, setActive] = useState(false);
@@ -44,7 +45,7 @@ export default function NavBar() {
       <Container className="w-full h-full d-flex justify-content-around">
         <NavLink
           className="navBar__logo h-full d-flex justify-content-center align-items-center"
-          to="/"
+          to={`${homePagePath}`}
         >
           Anime Zone
         </NavLink>
@@ -60,7 +61,7 @@ export default function NavBar() {
           </li>
           <li>
             <NavLink
-              to="/anime/browse/category"
+              to={`${browsePagePath}/category`}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Thể loại
@@ -68,7 +69,7 @@ export default function NavBar() {
           </li>
           <li>
             <NavLink
-              to="/anime/browse/new"
+              to={`${browsePagePath}/new`}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Mới nhất

@@ -5,7 +5,13 @@ import Player from "./pages/Player";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import CustomRoute from "components/CustomRoute";
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import {
+  detailsPagePath,
+  playerPagePath,
+  browsePagePath,
+  homePagePath,
+} from "constants/path";
 
 import ANIAPI from "@mattplays/aniapi";
 import aniListApi from "./api/aniListAPI";
@@ -127,7 +133,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <CustomRoute>
           <Route
-            path="/"
+            path={`${homePagePath}`}
             element={
               <HomePage newAniList={newAniList} suggestList={suggestList} />
             }
@@ -140,10 +146,10 @@ function App() {
             />
           </Route>
 
-          <Route path="anime/details/:animeId" element={<Anime />} />
-          <Route path="anime/watch/:animeId" element={<Player />} />
+          <Route path={`${detailsPagePath}/:animeId`} element={<Anime />} />
+          <Route path={`${playerPagePath}/:animeId`} element={<Player />} />
 
-          <Route path="anime/browse/" element={<Browse />}>
+          <Route path={`${browsePagePath}`} element={<Browse />}>
             <Route path=":type" element={<Browse />} />
           </Route>
 

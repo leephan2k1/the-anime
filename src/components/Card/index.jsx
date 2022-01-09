@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 import Button from "../Button";
 import { Link, useParams } from "react-router-dom";
+import { playerPagePath, detailsPagePath } from "constants/path";
 
 function Card(props) {
   const { imgSrc, episode_count, id, typeCard, title, customCard } = props;
   let basePath;
   const { animeId } = useParams();
   // console.log(customCard);
-
   if (customCard === "episodeCard") {
-    basePath = "/anime/watch";
+    basePath = `/${playerPagePath}`;
   } else {
-    basePath = "/anime/details";
+    basePath = `/${detailsPagePath}`;
   }
 
   // console.log(basePath);
