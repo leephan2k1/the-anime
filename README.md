@@ -29,7 +29,7 @@ Project được build bởi [Create React App](https://github.com/facebook/crea
 - Chọn filter genres anime trên home page.
 - Xem anime format .mp4 **(Do API của các bạn nước ngoài làm nên chỉ là EngSub)**
 - Tìm kiếm anime ở home page hoặc browse page.
-- Lọc anime theo filter ở home page.
+- Lọc anime theo filter ở browse page.
 - Xem anime mới nhất ở browse page cấu hình theo param.
 
 ## Tính năng dự định phát triển thêm:
@@ -38,7 +38,8 @@ Project được build bởi [Create React App](https://github.com/facebook/crea
 2. Trang login.
 3. Trang danh sách xếp hạng.
 4. Trang đánh giá.
-5. (Xa hơn) training thêm ExpressJS + MongoDB lưu blog anime.
+5. Giao diện chọn epsisode ở Player page.
+6. (Xa hơn) training thêm ExpressJS + MongoDB lưu blog anime.
 
 ## Tham khảo
 
