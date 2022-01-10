@@ -18,7 +18,6 @@ export default function Header() {
   const [responseList, setResponseList] = useState([]);
 
   const debounceTimes = useRef();
-
   const midElem = useSelector(remainMiddleElem);
 
   //side Effect sync banner middle element
@@ -70,6 +69,7 @@ export default function Header() {
     const responseUI = document.querySelector(".searchAnime__responseZone");
     const searchInputDOM = document.querySelector(".searchAnime__input");
     let preventImmediatelyHidden;
+    console.log([searchInputDOM]);
 
     const handleStyleActive = () => {
       responseUI.style.cssText = "display: block";
@@ -93,7 +93,7 @@ export default function Header() {
       }
       clearTimeout(preventImmediatelyHidden);
     };
-  }, []);
+  }, [urlBanner]);
 
   const handleSearchTitle = (e) => {
     setSearchValues(() => e.target.value);
@@ -101,6 +101,7 @@ export default function Header() {
 
   return (
     <header className="header">
+      {console.log("header mounted")}
       {midElem ? (
         <div className="header__banner h-full d-flex justify-content-center">
           {animeTitle ? (
