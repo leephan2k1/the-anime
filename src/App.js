@@ -1,7 +1,6 @@
 import "./App.scss";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
-import Player from "./pages/Player";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import CustomRoute from "components/CustomRoute";
@@ -24,6 +23,7 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const Anime = lazy(() => import("./pages/Anime"));
 const _404Page = lazy(() => import("./pages/404Page"));
 const Browse = lazy(() => import("./pages/Browse"));
+const Player = lazy(() => import("./pages/Player"));
 
 function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -74,7 +74,7 @@ function App() {
           2
         );
         const fallSeason = await API.Anime.Get({ year: 2021, season: 3 }, 1, 2);
-        const winterSeason = await API.Anime.Get({ season: 4 }, 1, 2);
+        const winterSeason = await API.Anime.Get({ season: 0 }, 1, 2);
 
         //store to redux
         const seasonPayLoad = {
