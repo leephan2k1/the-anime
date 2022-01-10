@@ -1,28 +1,25 @@
+import ANIAPI from "@mattplays/aniapi";
 import Plyr from "plyr-react";
 import "plyr-react/dist/plyr.css";
-import { useEffect, useState, useRef } from "react";
-import { useSearchParams, useParams, useNavigate } from "react-router-dom";
-import ANIAPI from "@mattplays/aniapi";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "./styles.scss";
 
-function Player(pops) {
-  const [searchParams, setSearchParams] = useSearchParams();
+function Player() {
+  const [searchParams] = useSearchParams();
   const { animeId } = useParams();
   const [aniUrl, setAniUrl] = useState();
   const timeOutBackBtn = useRef();
   const navigate = useNavigate();
   const API = new ANIAPI.API("DUMMY_JWT");
-  const plyrRef = useRef();
-  // console.log("anime id >>>>>>>>>", animeId);
 
   //call api
   useEffect(() => {
-    // console.log(animeId);
     const fetchEpisode = async () => {
       try {
         const responseEpisode = await API.Episode.Get({
           anime_id: animeId,
-          locale: "en",
+          locale: "it",
         });
         // console.log(responseEpisode);
         if (responseEpisode.status_code === 200) {
@@ -55,8 +52,6 @@ function Player(pops) {
       }
     };
     fetchEpisode();
-    // console.log(searchParams.get("index"));
-    // Access the internal plyr instance
   }, []);
 
   //css Effect back button
@@ -65,7 +60,6 @@ function Player(pops) {
     const backBtnDOM = document.querySelector(
       ".animeZonePlayer .bi-arrow-left"
     );
-    let timeoutEvent;
     const handleEvent = () => {
       backBtnDOM.style.cssText = "display: block";
       if (timeOutBackBtn.current) {
@@ -84,7 +78,6 @@ function Player(pops) {
 
   return (
     <div className="animeZonePlayer d-flex justify-content-center">
-      {/* {console.log(aniUrl)} */}
       <i
         onClick={() => {
           navigate(`/anime/details/${animeId}`);
@@ -92,7 +85,6 @@ function Player(pops) {
         className="bi bi-arrow-left"
       ></i>
       <Plyr
-        ref={plyrRef}
         source={aniUrl}
         options={{
           blankVideo: "https://youtu.be/at_oZEBRJMQ",
