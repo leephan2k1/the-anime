@@ -1,13 +1,12 @@
 import ANIAPI from "@mattplays/aniapi";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AnimeDescription from "../../components/AnimeDescription";
-import AnimeEpisode from "../../components/AnimeEpisode";
-import AnimeHeader from "../../components/AnimeHeader";
-// import { Outlet } from "react-router-dom";
+import AnimeDescription from "components/AnimeDescription";
+import AnimeEpisode from "components/AnimeEpisode";
+import AnimeHeader from "components/AnimeHeader";
 import "./styles.scss";
 
-export default function Anime(props) {
+export default function Anime() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [animeDetails, setAnimeDetails] = useState({});
   const [episode, setEpisode] = useState({});
@@ -53,5 +52,3 @@ export default function Anime(props) {
     </div>
   );
 }
-
-Anime.propTypes = {};
