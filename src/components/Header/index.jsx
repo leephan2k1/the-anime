@@ -69,7 +69,7 @@ export default function Header() {
     const responseUI = document.querySelector(".searchAnime__responseZone");
     const searchInputDOM = document.querySelector(".searchAnime__input");
     let preventImmediatelyHidden;
-    console.log([searchInputDOM]);
+    // console.log([searchInputDOM]);
 
     const handleStyleActive = () => {
       responseUI.style.cssText = "display: block";
@@ -101,7 +101,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      {console.log("header mounted")}
+      {/* {console.log("header mounted")} */}
       {midElem ? (
         <div className="header__banner h-full d-flex justify-content-center">
           {animeTitle ? (
