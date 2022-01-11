@@ -38,8 +38,9 @@ Project được build bởi [Create React App](https://github.com/facebook/crea
 2. Trang login.
 3. Trang danh sách xếp hạng.
 4. Trang đánh giá.
-5. Giao diện chọn epsisode ở Player page.
-6. (Xa hơn) training thêm ExpressJS + MongoDB lưu blog anime.
+5. Trang random anime arts
+6. Giao diện chọn epsisode ở Player page.
+7. (Xa hơn) training thêm ExpressJS + MongoDB lưu blog anime.
 
 ## Tham khảo
 
