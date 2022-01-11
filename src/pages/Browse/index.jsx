@@ -1,16 +1,21 @@
 import ANIAPI from "@mattplays/aniapi";
+import data from "./supportData";
+
 import { setFilter } from "app/filtersSlice";
 import { filter } from "app/selectors";
+import { useDispatch, useSelector } from "react-redux";
+
 import Card from "components/Card";
 import DropDown from "components/DropDown";
-import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
+import MyLoader from "components/MyLoader";
+import { carouselLoaderSettings } from "settings";
+
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import { isEmptyObject, sleep } from "utils";
 import "./styles.scss";
-import data from "./supportData";
 
 function Browse() {
   const API = new ANIAPI.API("DUMMY_JWT");
@@ -19,14 +24,14 @@ function Browse() {
   const [searchFilter, setSearchFilter] = useState("");
   const debounceTime = useRef();
   const dataFlow = useRef({
+    isFetching: false,
     current_page: 1,
   });
   const filterFromRedux = useSelector(filter);
   const dispatch = useDispatch();
-  // const checkRender = useRef(0);
   const { type } = useParams();
+  const [hasMoreState, setHasMoreState] = useState(false);
 
-  // console.log(type);
   //update filters follow dropdown
   const triggerFilters = (key, value) => {
     setFilters((prev) => {
@@ -53,12 +58,10 @@ function Browse() {
   };
 
   const fetchData = async () => {
-    // console.log(`render lan ${checkRender.current}`, filters);
-    // checkRender.current++;
-    // console.log(filters);
     if (!isEmptyObject(filters)) {
       const response = await API.Anime.Get(filters, 1, 12);
-      // console.log(response);
+      // dataFlow.current.isFetching = true;
+      setHasMoreState(true);
       return response.data?.documents;
     }
   };
@@ -80,15 +83,21 @@ function Browse() {
         return uniqueData;
       });
       dataFlow.current.current_page++;
+    } else {
+      // dataFlow.current.isFetching = false;
+      setHasMoreState(false);
     }
   };
 
   //fetch follow filters
   useEffect(() => {
     //reset when filters change
-    setDataList([]);
     fetchData().then((value) => setDataList(value));
     dataFlow.current.current_page++;
+
+    return () => {
+      setDataList([]);
+    };
   }, [filters]);
 
   //debounce reduce call API
@@ -112,7 +121,6 @@ function Browse() {
 
   //reset filter in redux
   useEffect(() => {
-    // console.log("re-render");
     if (filterFromRedux) {
       if (!isNaN(filterFromRedux)) {
         triggerFilters("season", filterFromRedux);
@@ -174,16 +182,14 @@ function Browse() {
         </Row>
       </Container>
       <Container id="scrollableDiv" className="browse__animeCards w-full">
-        {dataList && dataList.length > 0 && (
-          <InfiniteScroll
-            dataLength={dataList.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={<h4>Loading...</h4>}
-            hasChildren={false}
-          >
-            <Row>
-              {dataList.map((e, index) => {
+        <InfiniteScroll
+          dataLength={dataList.length}
+          next={fetchMoreData}
+          hasMore={hasMoreState}
+          hasChildren={false}
+          endMessage={
+            <Row className="overflow-hidden">
+              {dataList.map((e) => {
                 return (
                   <Col
                     key={e.anilist_id}
@@ -204,8 +210,53 @@ function Browse() {
                 );
               })}
             </Row>
-          </InfiniteScroll>
-        )}
+          }
+          loader={
+            <Row>
+              {[...Array(12).keys()].map((e) => {
+                return (
+                  <Col
+                    key={e}
+                    lg="2"
+                    md="4"
+                    sm="6"
+                    xs="6"
+                    className="card-column d-flex flex-column align-items-center justify-content-center"
+                  >
+                    <MyLoader
+                      stloader={carouselLoaderSettings}
+                      className={"cardContainer"}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
+          }
+        >
+          <Row>
+            {hasMoreState &&
+              dataList.map((e) => {
+                return (
+                  <Col
+                    key={e.anilist_id}
+                    lg="2"
+                    md="4"
+                    sm="6"
+                    xs="6"
+                    className="card-column d-flex flex-column align-items-center justify-content-center"
+                  >
+                    <Card
+                      id={e.id}
+                      typeCard={"details"}
+                      imgSrc={e.cover_image}
+                      episode_count={e.episodes_count}
+                      title={e.titles.en || e.titles.jp}
+                    />
+                  </Col>
+                );
+              })}
+          </Row>
+        </InfiniteScroll>
       </Container>
     </div>
   );
