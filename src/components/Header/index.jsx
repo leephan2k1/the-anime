@@ -70,7 +70,6 @@ export default function Header() {
     const searchInputDOM = document.querySelector(".searchAnime__input");
     let preventImmediatelyHidden;
     // console.log([searchInputDOM]);
-
     const handleStyleActive = () => {
       responseUI.style.cssText = "display: block";
     };
