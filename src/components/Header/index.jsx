@@ -30,6 +30,14 @@ export default function Header() {
         return validDesc?.replace(/<\/?[^>]+(>|$)/g, "");
       });
     }
+
+    return () => {
+      setUrlBanner("");
+      setAnimeTitle("");
+      setanimeDesc("");
+      setSearchValues("");
+      setResponseList([]);
+    };
   }, [midElem]);
 
   //side Effect fetch api search filter
