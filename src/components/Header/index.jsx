@@ -31,13 +31,7 @@ export default function Header() {
       });
     }
 
-    return () => {
-      setUrlBanner("");
-      setAnimeTitle("");
-      setanimeDesc("");
-      setSearchValues("");
-      setResponseList([]);
-    };
+    return () => {};
   }, [midElem]);
 
   //side Effect fetch api search filter
