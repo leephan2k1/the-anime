@@ -10,10 +10,14 @@ import {
   playerPagePath,
   browsePagePath,
   homePagePath,
+  signInPagePath,
 } from "constants/path";
 
 import ANIAPI from "@mattplays/aniapi";
 import aniListApi from "./api/aniListAPI";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 import { useDispatch } from "react-redux";
 import { addList } from "./app/listSlice";
@@ -24,16 +28,44 @@ const Anime = lazy(() => import("./pages/Anime"));
 const _404Page = lazy(() => import("./pages/404Page"));
 const Browse = lazy(() => import("./pages/Browse"));
 const Player = lazy(() => import("./pages/Player"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+
+// Configure Firebase.
+const config = {
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_API,
+};
+firebase.initializeApp(config);
 
 function App() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [newAniList, setNewAniList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
   const [toggleSideBar, setToggleSideBar] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   const dispatch = useDispatch();
 
-  //call api 4 homepage
+  // Listen to the Firebase Auth state and set the local state.
+  useEffect(() => {
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged(async (user) => {
+        if (!user) {
+          //user logout
+          console.log("User not log in");
+          return;
+        }
+
+        console.log("user logged: ", user.photoURL);
+        const token = await user.getIdToken();
+        console.log("Logged user Token: ", token);
+      });
+    // Make sure we un-register Firebase observers when the component unmounts.
+    return () => unregisterAuthObserver();
+  }, []);
+
+  //call api for homepage
   useEffect(() => {
     const fetchRamdomList = async () => {
       try {
@@ -146,9 +178,9 @@ function App() {
             />
           </Route>
 
+          <Route path={`${signInPagePath}`} element={<SignIn />} />
           <Route path={`${detailsPagePath}/:animeId`} element={<Anime />} />
           <Route path={`${playerPagePath}/:animeId`} element={<Player />} />
-
           <Route path={`${browsePagePath}`} element={<Browse />}>
             <Route path=":type" element={<Browse />} />
           </Route>
