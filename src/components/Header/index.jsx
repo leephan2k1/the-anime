@@ -16,7 +16,6 @@ export default function Header() {
   const [animeDesc, setanimeDesc] = useState("");
   const [searchValues, setSearchValues] = useState("");
   const [responseList, setResponseList] = useState([]);
-
   const debounceTimes = useRef();
   const midElem = useSelector(remainMiddleElem);
 
@@ -31,7 +30,11 @@ export default function Header() {
       });
     }
 
-    return () => {};
+    return () => {
+      setUrlBanner("");
+      setAnimeTitle("");
+      setanimeDesc("");
+    };
   }, [midElem]);
 
   //side Effect fetch api search filter
@@ -64,6 +67,10 @@ export default function Header() {
     };
 
     fetchSearchFilter();
+
+    return () => {
+      setResponseList([]);
+    };
   }, [searchValues]);
 
   //side Effect active CSS response zone
