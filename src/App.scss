@@ -2,7 +2,7 @@
 .Anime-app {
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: $background-color;
   &__overlay {
     z-index: 600;
@@ -11,4 +11,13 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $icon-color;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-corner {
 }
