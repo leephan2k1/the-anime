@@ -65,15 +65,14 @@ function Browse() {
     }
   };
   //support infinite scroll
-  const fetchMoreData = useCallback(async () => {
-    await sleep(200);
+  const fetchMoreData = async () => {
+    await sleep(100);
     try {
       const response = await API.Anime.Get(
         filters,
         dataFlow.current.current_page,
         12
       );
-      console.log(response);
       if (response.status_code === 200) {
         setDataList((prev) => {
           prev = prev.concat(response.data.documents);
@@ -85,13 +84,12 @@ function Browse() {
         dataFlow.current.current_page++;
       } else {
         // dataFlow.current.isFetching = false;
-        console.log("Hết");
         setHasMoreState(false);
       }
     } catch (err) {
       console.log("err >>>", err);
     }
-  });
+  };
 
   //fetch follow filters
   useEffect(() => {
