@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./styles.scss";
 import "animate.css";
-import { browsePagePath, homePagePath } from "constants/path";
+import { browsePagePath, homePagePath, signInPagePath } from "constants/path";
+import firebase from "firebase/compat/app";
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [isActive, setActive] = useState(false);
   const [toggleUser, setToggleUser] = useState(false);
+  const { userImg, isSignedIn, setIsSignedIn } = props;
 
   //Active css scroll
   useEffect(() => {
@@ -31,6 +33,23 @@ export default function NavBar() {
     };
   }, [isActive]);
 
+  //Active css dropdown user menu
+  useEffect(() => {
+    const userDropDownDOM = document.querySelector(".user__dropdown");
+    const appDOM = document.querySelector(".Anime-app");
+
+    const hiddenDropdown = () => {
+      userDropDownDOM.style.cssText = "display: none";
+    };
+
+    appDOM.addEventListener("click", hiddenDropdown);
+
+    return () => {
+      userDropDownDOM.style.cssText = "display: none";
+      appDOM.removeEventListener("click", hiddenDropdown);
+    };
+  }, []);
+
   const activeUser = () => {
     const userDropDownDOM = document.querySelector(".user__dropdown");
     if (!toggleUser) {
@@ -40,6 +59,15 @@ export default function NavBar() {
     }
     setToggleUser((prev) => !prev);
   };
+
+  const handleSignOut = async () => {
+    await firebase.auth().signOut();
+    if (setIsSignedIn) {
+      setIsSignedIn(false);
+      window.location.reload();
+    }
+  };
+
   return (
     <nav className="navBar w-full d-flex align-items-center">
       <Container className="w-full h-full d-flex justify-content-around">
@@ -79,11 +107,19 @@ export default function NavBar() {
         <div className="navBar__right-wrapper d-flex justify-content-center align-items-center">
           <div className="user h-full d-flex align-items-center">
             <i className="bi bi-list me-4"></i>
-            <i className="bi bi-person-circle" onClick={activeUser}></i>
+            <div className="user__img d-flex" onClick={activeUser}>
+              {userImg ? (
+                <img src={userImg} alt="avatar" />
+              ) : (
+                <i className="bi bi-person-circle"></i>
+              )}
+            </div>
             <div className="user__dropdown justify-content-center align-items-center">
-              <span className="animate__animated animate__fadeIn animate__infinite">
-                Đang phát triển...
-              </span>
+              {isSignedIn ? (
+                <a onClick={handleSignOut}>Đăng xuất</a>
+              ) : (
+                <Link to={`${signInPagePath}`}>Đăng nhập</Link>
+              )}
             </div>
           </div>
         </div>

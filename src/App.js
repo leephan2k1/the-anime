@@ -42,7 +42,8 @@ function App() {
   const [newAniList, setNewAniList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
   const [toggleSideBar, setToggleSideBar] = useState(true);
-  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+  const [userImg, setUserImg] = useState("");
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -58,6 +59,8 @@ function App() {
         }
 
         console.log("user logged: ", user.photoURL);
+        setUserImg(user.photoURL);
+        setIsSignedIn(true);
         const token = await user.getIdToken();
         console.log("Logged user Token: ", token);
       });
@@ -160,7 +163,11 @@ function App() {
       {toggleSideBar === false ? (
         <div className="Anime-app__overlay"></div>
       ) : null}
-      <NavBar />
+      <NavBar
+        userImg={userImg}
+        isSignedIn={isSignedIn}
+        setIsSignedIn={setIsSignedIn}
+      />
       <SideBar handleEffectSideBar={handleEffectSideBar} />
       <Suspense fallback={<div>Loading...</div>}>
         <CustomRoute>
