@@ -1,0 +1,13 @@
+@import "../../assets/styles/mixin";
+
+.signIn-page {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include desktop {
+    background-size: 100% 100%;
+  }
+}
