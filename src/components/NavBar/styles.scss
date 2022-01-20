@@ -48,11 +48,11 @@
     li a {
       color: #fff;
       font-weight: 500;
+      position: relative;
+      z-index: 10000;
     }
     .active {
-      border-bottom: 5px solid $icon-color;
-      border-radius: 10px;
-      padding: 5px;
+      color: $acive-color;
     }
   }
   &__logo {
