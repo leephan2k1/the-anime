@@ -13,7 +13,7 @@ export default function Header() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [urlBanner, setUrlBanner] = useState("");
   const [animeTitle, setAnimeTitle] = useState("");
-  const [animeDesc, setanimeDesc] = useState("");
+  const [animeDesc, setAnimeDesc] = useState("");
   const [searchValues, setSearchValues] = useState("");
   const [responseList, setResponseList] = useState([]);
   const debounceTimes = useRef();
@@ -22,19 +22,12 @@ export default function Header() {
   //side Effect sync banner middle element
   useEffect(() => {
     if (midElem) {
-      setUrlBanner(midElem.banner_image);
-      setAnimeTitle(midElem.titles.en);
-      setanimeDesc(() => {
-        const validDesc = midElem.descriptions.en || midElem.descriptions.it;
-        return validDesc?.replace(/<\/?[^>]+(>|$)/g, "");
-      });
+      setUrlBanner(midElem.thumbnail);
+      setAnimeTitle(midElem.name);
+      setAnimeDesc(() => midElem.details?.description);
     }
 
-    return () => {
-      setUrlBanner("");
-      setAnimeTitle("");
-      setanimeDesc("");
-    };
+    return () => {};
   }, [midElem]);
 
   //side Effect fetch api search filter
@@ -109,7 +102,6 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* {console.log("header mounted")} */}
       {midElem ? (
         <div className="header__banner h-full d-flex justify-content-center">
           {animeTitle ? (

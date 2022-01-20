@@ -9,6 +9,8 @@ export const remainMiddleElem = createSelector(
   homeList,
   middleElemId,
   (randomLst, middleElem) => {
-    return randomLst.length && randomLst.find((e) => e.id === +middleElem);
+    return (
+      randomLst.length && randomLst.find((e) => e.details?.id === +middleElem)
+    );
   }
 );

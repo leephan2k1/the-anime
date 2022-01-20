@@ -24,9 +24,9 @@ function Card(props) {
       }${customCard === "episodeCard" ? `?index=${episode_count}` : ""}`}
       className="cardContainer position-relative"
     >
-      <span className="cardContainer__episode position-absolute">
+      {/* <span className="cardContainer__episode position-absolute">
         {episode_count}
-      </span>
+      </span> */}
       <img className="cardContainer__img w-full h-full" src={imgSrc} alt={id} />
       <div className="cardContainer__playBtn position-absolute ">
         <Button type={"Play"} />

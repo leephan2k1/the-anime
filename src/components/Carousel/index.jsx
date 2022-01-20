@@ -14,12 +14,12 @@ import { setMiddleElem } from "app/listSlice";
 
 function Carousel(props) {
   const { settings, carouselType, data, renderType, customThumbnail } = props;
+  const [dataList, setDataList] = useState([]);
   const sliderRef = useRef(null);
   const dispatch = useDispatch();
 
-  // console.log(data);
-
   if (carouselType === "carouselMain") {
+    console.log(data);
     settings.afterChange = () => {
       handleMainCarouselCSS();
       const id = getMiddleElement();
@@ -51,8 +51,8 @@ function Carousel(props) {
           ? data.map((elem, index) => {
               return (
                 <div
-                  key={elem.anilist_id + index}
-                  data-id={elem.id}
+                  key={elem.slug + index}
+                  data-id={elem.details?.id || elem.slug}
                   className={`cardWrapper d-flex justify-content-center`}
                 >
                   {renderType === "Box" ? (
@@ -68,10 +68,13 @@ function Carousel(props) {
                     />
                   ) : (
                     <Card
-                      imgSrc={customThumbnail || elem.cover_image}
-                      episode_count={elem.episodes_count || index + 1}
-                      episode_duration={elem.episode_duration}
-                      id={elem.id}
+                      imgSrc={
+                        customThumbnail ||
+                        elem.details?.thumbnail ||
+                        elem.thumbnail
+                      }
+                      // episode_count={elem.episodes_count || index + 1}
+                      id={elem.slug}
                       typeCard={
                         carouselType === "carouselSection" ||
                         carouselType === "episodeSection"

@@ -15,6 +15,8 @@ import {
 
 import ANIAPI from "@mattplays/aniapi";
 import aniListApi from "./api/aniListAPI";
+import aniList from "./api/aniList";
+import ani from "./api/ani";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -58,11 +60,11 @@ function App() {
           return;
         }
 
-        console.log("user logged: ", user.photoURL);
+        // console.log("user logged: ", user.photoURL);
         setUserImg(user.photoURL);
         setIsSignedIn(true);
         const token = await user.getIdToken();
-        console.log("Logged user Token: ", token);
+        // console.log("Logged user Token: ", token);
       });
     // Make sure we un-register Firebase observers when the component unmounts.
     return () => unregisterAuthObserver();
@@ -72,12 +74,19 @@ function App() {
   useEffect(() => {
     const fetchRamdomList = async () => {
       try {
-        const response = await aniListApi.getRandom(200);
-        const listHasBanner = response.data.filter(
-          (e) => e.banner_image !== undefined
-        );
-        //store to redux
-        dispatch(addList(listHasBanner));
+        const response = await aniList.getSlide();
+        let slideData = [];
+        if (response.success) {
+          slideData = response.data;
+        }
+        //get small thumbnail
+        for (let i = 0; i < slideData.length; i++) {
+          const aniDetails = await ani.getDetails(slideData[i].slug);
+          if (aniDetails.success) {
+            slideData[i].details = aniDetails.data;
+          }
+        }
+        dispatch(addList(slideData));
 
         const dataFilter = await API.Anime.Get(
           { year: 2021, season: 3 },
