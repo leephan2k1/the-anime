@@ -13,13 +13,21 @@ function AnimeHeader(props) {
 
   //css & checking data
   useEffect(() => {
-    const setImage = async () => {
-      await setBannerImgURL(() => {
-        return data.banner_image || defaultImage;
-      });
+    const setImage = () => {
+      if (data.episodes) {
+        setBannerImgURL(() => {
+          return data.episodes[0].thumbnail_small || defaultImage;
+        });
+      }
       const animeHeaderDOM = document.querySelector(".animeHeader");
+      const animeHeaderCardDOM = document.querySelector(
+        ".animeHeader .animeHeader__card"
+      );
       if (animeHeaderDOM) {
         animeHeaderDOM.style.cssText = `background-image: url(${bannerImgURL})`;
+      }
+      if (animeHeaderCardDOM) {
+        animeHeaderCardDOM.style.cssText = `background-image: url(${data.thumbnail})`;
       }
     };
     setImage();
@@ -27,14 +35,13 @@ function AnimeHeader(props) {
 
   return (
     <header className="animeHeader w-full">
-      {data.cover_image ? (
+      {data.id ? (
         <Box
           classNames={{
             wrapperClassName: "animeHeader__card overflow-hidden",
             imgClassName: "animeHeader__card__img",
             titleClassName: "animeHeader__card__title",
           }}
-          imgUrl={data.cover_image}
         />
       ) : (
         <MyLoader

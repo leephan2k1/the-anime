@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 export default function AnimeDescription(props) {
   const { data, episode } = props;
-  // console.log(episode);
+
+  console.log(data);
 
   //handle CSS
   useEffect(() => {
@@ -60,16 +61,20 @@ export default function AnimeDescription(props) {
           </Link>
         </div>
         <div className="animeDescription__wrapper__desc">
-          {data.titles ? (
+          {data.name ? (
             <>
-              <p className="desc__title">{data.titles.en}</p>
-              <p className="desc__title">{data.titles.jp}</p>
+              <p className="desc__title">{data.name}</p>
+              <p className="desc__title team-sub">
+                {data.subTeams.map((e) => {
+                  return `${e} `;
+                })}
+              </p>
               <div className="desc__title">
                 {data.genres.map((e, idx) => {
                   if (idx > 4) return;
                   return (
                     <span key={idx} className="desc__genres">
-                      {e}{" "}
+                      {e.name}{" "}
                     </span>
                   );
                 })}
@@ -103,10 +108,9 @@ export default function AnimeDescription(props) {
             })
           )}
 
-          {data.descriptions ? (
+          {data.description ? (
             <p className="desc__details">
-              {data.descriptions.en?.replace(/<\/?[^>]+(>|$)/g, "") ||
-                data.descriptions.it?.replace(/<\/?[^>]+(>|$)/g, "")}
+              {data.description?.replace(/<\/?[^>]+(>|$)/g, "")}
             </p>
           ) : (
             <ContentLoader

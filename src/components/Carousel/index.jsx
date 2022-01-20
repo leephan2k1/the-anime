@@ -19,7 +19,6 @@ function Carousel(props) {
   const dispatch = useDispatch();
 
   if (carouselType === "carouselMain") {
-    console.log(data);
     settings.afterChange = () => {
       handleMainCarouselCSS();
       const id = getMiddleElement();
