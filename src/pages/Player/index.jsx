@@ -19,7 +19,7 @@ function Player() {
   const animeId = useSelector(aniIdDetails);
   const index = +searchParams.get("index");
 
-  // console.log(animeId);
+  console.log(">>>>>>> ", animeId);
   //call api
   useEffect(() => {
     const fetchEpisode = async () => {

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { sectionCarouselSettings } from "settings";
 import { Link } from "react-router-dom";
 import Carousel from "../Carousel";
@@ -9,19 +9,32 @@ function SectionAnime(props) {
   const { title, data, thumbnail, sectionType, target } = props;
 
   //configure 4 AnimeEpisode Component
-  if (sectionType === "Episode") {
-    sectionCarouselSettings.infinite = false;
-    sectionCarouselSettings.speed = 150;
-    sectionCarouselSettings.responsive[0] = {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: false,
-      },
+  useEffect(() => {
+    if (sectionType === "Episode") {
+      sectionCarouselSettings.infinite = false;
+      sectionCarouselSettings.speed = 150;
+      sectionCarouselSettings.responsive[0] = {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false,
+        },
+      };
+    }
+    return () => {
+      sectionCarouselSettings.responsive[0] = {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false,
+        },
+      };
     };
-  }
+  }, []);
 
   const handleOptionClick = (e) => {
     if (sectionType === "Episode") {

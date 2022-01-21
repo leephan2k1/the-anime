@@ -9,6 +9,11 @@ const aniList = {
     const url = `/search?q=${params}`;
     return axiosClient.get(url);
   },
+
+  getRecently: () => {
+    const url = `/recently`;
+    return axiosClient.get(url);
+  },
 };
 
 export default aniList;

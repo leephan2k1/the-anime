@@ -88,13 +88,11 @@ function App() {
         }
         dispatch(addList(slideData));
 
-        const dataFilter = await API.Anime.Get(
-          { year: 2021, season: 3 },
-          1,
-          10
-        );
+        const dataFilter = await ani.getRecently();
         //store to state
-        setNewAniList(dataFilter.data.documents);
+        if (dataFilter.success) {
+          setNewAniList(dataFilter.data);
+        }
         const dataSuggest = await API.Anime.Get(
           {
             genres: ["Action", "Adventure", "Comedy"],

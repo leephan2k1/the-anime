@@ -6,7 +6,7 @@ import gomenasaiImg from "assets/images/gomenasai.jpg";
 export default function AnimeEpisode(props) {
   const { data, thumbnail } = props;
 
-  console.log("AnimeEpisode data: ", data);
+  // console.log("AnimeEpisode data: ", data);
 
   return (
     <section className="animeEpisode w-full d-flex flex-column justify-content-center align-items-center">

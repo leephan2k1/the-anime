@@ -10,7 +10,6 @@ import { aniIdDetails } from "app/selectors";
 function Card(props) {
   const { imgSrc, episode_count, slug, typeCard, title, customCard } = props;
   let basePath;
-  const { animeId } = useParams();
   const aniId = useSelector(aniIdDetails);
 
   // console.log(slug);

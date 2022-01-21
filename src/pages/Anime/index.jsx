@@ -37,9 +37,7 @@ export default function Anime() {
 
     fetchAnime();
 
-    return () => {
-      dispatch(setAniId(""));
-    };
+    return () => {};
   }, []);
 
   return (
