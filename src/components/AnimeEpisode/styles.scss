@@ -3,18 +3,14 @@
 
 .animeEpisode {
   overflow-y: hidden;
-  @include mobileSmall {
-    margin-top: 8rem;
-  }
+  position: relative;
   @include mobile {
-    margin-top: 12rem;
+    margin-top: 20rem;
   }
+
   @include tablet {
     .cardWrapper {
       transform: scale(70%);
-    }
-    .Next .Prev {
-      top: -10%;
     }
   }
 
@@ -29,17 +25,21 @@
     font-size: 2rem;
   }
   &__episodes {
+    position: absolute;
+    top: 0;
     width: fit-content;
     .dropdown {
       position: relative;
     }
     .dropdown > button {
-      width: fit-content;
+      width: 150px;
       height: 50px;
     }
     .dropdown > .dropdown-menu {
       z-index: 999999;
       width: fit-content;
+      height: 300px;
+      overflow-y: auto;
       font-size: 1.5rem;
       position: absolute !important;
       left: 50% !important;

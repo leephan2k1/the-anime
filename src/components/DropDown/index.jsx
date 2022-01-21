@@ -67,7 +67,7 @@ export default function DropDown(props) {
             +e.target.innerText.charAt(4) - 1
           }`
         );
-        console.log("error dispatch");
+      // console.log("error dispatch");
     }
   };
 
@@ -94,14 +94,14 @@ export default function DropDown(props) {
       {/* {console.log(id, " - ", caretTitle)} */}
       <DropdownToggle caret>{caretTitle || title}</DropdownToggle>
       <DropdownMenu>
-        {listItem &&
+        {(listItem &&
           listItem.map((e, idx) => {
             return (
               <DropdownItem onClick={handleClickItem} key={idx}>
                 {e?.full_name || e}
               </DropdownItem>
             );
-          })}
+          })) || <></>}
       </DropdownMenu>
     </Dropdown>
   );

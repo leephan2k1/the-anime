@@ -97,9 +97,6 @@
   .Next,
   .Prev {
     top: -14%;
-    @include tablet {
-      top: -17%;
-    }
     @include mobileSmall {
       top: -27%;
       width: 45px;
@@ -120,6 +117,18 @@
     }
     @include mobileSmall {
       right: 20%;
+    }
+  }
+}
+.episodeSection {
+  .Next,
+  .Prev {
+    top: 0;
+  }
+  @include mobile {
+    .Next,
+    .Prev {
+      top: -20%;
     }
   }
 }
