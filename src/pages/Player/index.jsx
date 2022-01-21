@@ -1,31 +1,37 @@
 import ANIAPI from "@mattplays/aniapi";
+import ani from "api/ani";
 import Plyr from "plyr-react";
 import "plyr-react/dist/plyr.css";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./styles.scss";
+
+import { useSelector } from "react-redux";
+import { aniSlugDetails, aniIdDetails } from "app/selectors";
 
 function Player() {
   const [searchParams] = useSearchParams();
-  const { animeId } = useParams();
   const [aniUrl, setAniUrl] = useState();
   const timeOutBackBtn = useRef();
   const navigate = useNavigate();
   const API = new ANIAPI.API("DUMMY_JWT");
+  const aniSlug = useSelector(aniSlugDetails);
+  const animeId = useSelector(aniIdDetails);
+  const index = +searchParams.get("index");
 
+  // console.log(animeId);
   //call api
   useEffect(() => {
     const fetchEpisode = async () => {
       try {
-        const responseEpisode = await API.Episode.Get({
-          anime_id: animeId,
-          locale: "it",
+        const responseEpisode = await ani.getEpisode({
+          id: animeId,
+          index,
         });
         // console.log(responseEpisode);
-        if (responseEpisode.status_code === 200) {
-          const url =
-            responseEpisode.data.documents[+searchParams.get("index") - 1]
-              .video;
+        if (responseEpisode.success) {
+          const url = responseEpisode.data.videoSource;
+          console.log(url);
           setAniUrl({
             type: "video",
             sources: [
@@ -35,22 +41,24 @@ function Player() {
               },
             ],
           });
-        } else {
-          console.log("not found episode anime!!");
-          setAniUrl({
-            type: "video",
-            sources: [
-              {
-                src: "wBamxCpvkGU",
-                provider: "youtube",
-              },
-            ],
-          });
         }
+        // else {
+        //   console.log("not found episode anime!!");
+        //   setAniUrl({
+        //     type: "video",
+        //     sources: [
+        //       {
+        //         src: "wBamxCpvkGU",
+        //         provider: "youtube",
+        //       },
+        //     ],
+        //   });
+        // }
       } catch (err) {
         console.log("fetch api fail error >>> ", err);
       }
     };
+
     fetchEpisode();
   }, []);
 
@@ -80,7 +88,7 @@ function Player() {
     <div className="animeZonePlayer d-flex justify-content-center">
       <i
         onClick={() => {
-          navigate(`/anime/details/${animeId}`);
+          navigate(`/anime/details/${aniSlug}`);
         }}
         className="bi bi-arrow-left"
       ></i>

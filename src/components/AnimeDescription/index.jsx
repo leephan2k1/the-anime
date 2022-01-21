@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 export default function AnimeDescription(props) {
   const { data, episode } = props;
 
-  console.log(data);
-
   //handle CSS
   useEffect(() => {
     const animeDscWrapperDOM = document.querySelector(
@@ -20,7 +18,7 @@ export default function AnimeDescription(props) {
         animeDescDOM.style.cssText = `height: ${animeDscWrapperDOM.offsetHeight}px`;
         if (window.innerWidth < 770) {
           animeDescDOM.style.cssText = `height: ${
-            animeDscWrapperDOM.offsetHeight * 1.7
+            animeDscWrapperDOM.offsetHeight * 1
           }px`;
         }
       }
@@ -40,7 +38,7 @@ export default function AnimeDescription(props) {
       <div className="animeDescription__wrapper d-flex flex-column justify-content-start">
         <div className="animeDescription__wrapper__control d-flex">
           <Link
-            to={`/anime/watch/${data.id}?index=1`}
+            to={`/anime/watch/${data.id}?index=0`}
             className="animeDescription__wrapper__control__playBtn d-flex justify-content-center align-items-center"
           >
             <i className="bi bi-play-fill"></i>
@@ -49,9 +47,7 @@ export default function AnimeDescription(props) {
             </span>
           </Link>
           <Link
-            to={`/anime/watch/${data.id}?index=${
-              episode?.documents && episode?.documents.length
-            }`}
+            to={`/anime/watch/${data.id}?index=${data.episodes?.length - 1}`}
             className="animeDescription__wrapper__control__playBtn d-flex justify-content-center align-items-center"
           >
             <i className="bi bi-play-fill"></i>
@@ -89,8 +85,8 @@ export default function AnimeDescription(props) {
                     width={300}
                     height={70}
                     viewBox="0 0 300 70"
-                    backgroundColor="#ffffff"
-                    foregroundColor="#d6d6d6"
+                    backgroundColor="#1f2123"
+                    foregroundColor="#5d6468"
                     {...props}
                   >
                     <rect
@@ -119,8 +115,8 @@ export default function AnimeDescription(props) {
               width={1000}
               height={100}
               viewBox="0 0 1000 100"
-              backgroundColor="#ffffff"
-              foregroundColor="#d6d6d6"
+              backgroundColor="#1f2123"
+              foregroundColor="#5d6468"
             >
               <rect x="2" y="30" rx="0" ry="0" width="700" height="312" />
             </ContentLoader>

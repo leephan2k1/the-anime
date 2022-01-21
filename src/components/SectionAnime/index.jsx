@@ -15,7 +15,7 @@ function SectionAnime(props) {
     sectionCarouselSettings.responsive[0] = {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 3,
         infinite: true,
         dots: false,
@@ -23,9 +23,15 @@ function SectionAnime(props) {
     };
   }
 
+  const handleOptionClick = (e) => {
+    if (sectionType === "Episode") {
+      e.preventDefault();
+    }
+  };
+
   return (
     <section className="section w-full d-flex flex-column">
-      <Link to={target} className="section__title">
+      <Link to={target} className="section__title" onClick={handleOptionClick}>
         {title}
         <i className="fas fa-chevron-right"></i>
       </Link>

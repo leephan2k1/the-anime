@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
 import Button from "../Button";
 import { Link, useParams } from "react-router-dom";
 import { playerPagePath, detailsPagePath } from "constants/path";
+import { useSelector } from "react-redux";
+import { aniIdDetails } from "app/selectors";
 
 function Card(props) {
-  const { imgSrc, episode_count, id, typeCard, title, customCard } = props;
+  const { imgSrc, episode_count, slug, typeCard, title, customCard } = props;
   let basePath;
   const { animeId } = useParams();
-  // console.log(customCard);
+  const aniId = useSelector(aniIdDetails);
+
+  // console.log(slug);
+
   if (customCard === "episodeCard") {
     basePath = `/${playerPagePath}`;
   } else {
@@ -20,14 +25,18 @@ function Card(props) {
   return (
     <Link
       to={`${basePath}/${
-        customCard === "episodeCard" ? `${animeId}` : `${id}`
+        customCard === "episodeCard" ? `${aniId}` : `${slug}`
       }${customCard === "episodeCard" ? `?index=${episode_count}` : ""}`}
       className="cardContainer position-relative"
     >
       {/* <span className="cardContainer__episode position-absolute">
         {episode_count}
       </span> */}
-      <img className="cardContainer__img w-full h-full" src={imgSrc} alt={id} />
+      <img
+        className="cardContainer__img w-full h-full"
+        src={imgSrc}
+        alt={slug}
+      />
       <div className="cardContainer__playBtn position-absolute ">
         <Button type={"Play"} />
       </div>

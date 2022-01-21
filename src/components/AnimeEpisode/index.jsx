@@ -5,6 +5,9 @@ import gomenasaiImg from "assets/images/gomenasai.jpg";
 
 export default function AnimeEpisode(props) {
   const { data, thumbnail } = props;
+
+  console.log("AnimeEpisode data: ", data);
+
   return (
     <section className="animeEpisode w-full d-flex flex-column justify-content-center align-items-center">
       {data === "Not found episode" ? (
@@ -22,7 +25,7 @@ export default function AnimeEpisode(props) {
         <SectionAnime
           target={"#"}
           title={"Tập phim"}
-          data={data.documents}
+          data={data.episodes}
           thumbnail={thumbnail}
           sectionType={"Episode"}
         />

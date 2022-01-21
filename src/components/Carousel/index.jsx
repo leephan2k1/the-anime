@@ -14,7 +14,6 @@ import { setMiddleElem } from "app/listSlice";
 
 function Carousel(props) {
   const { settings, carouselType, data, renderType, customThumbnail } = props;
-  const [dataList, setDataList] = useState([]);
   const sliderRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -72,8 +71,8 @@ function Carousel(props) {
                         elem.details?.thumbnail ||
                         elem.thumbnail
                       }
-                      // episode_count={elem.episodes_count || index + 1}
-                      id={elem.slug}
+                      episode_count={index}
+                      slug={elem.slug}
                       typeCard={
                         carouselType === "carouselSection" ||
                         carouselType === "episodeSection"

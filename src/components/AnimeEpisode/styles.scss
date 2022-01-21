@@ -1,5 +1,20 @@
+@import "../../assets/styles/mixin";
+@import "../../assets/styles/variable";
+
 .animeEpisode {
-  //   margin-top: 8rem;
+  overflow-y: hidden;
+  @include mobileSmall {
+    margin-top: 8rem;
+  }
+  @include mobile {
+    margin-top: 8rem;
+  }
+  @include tablet {
+    .cardWrapper {
+      transform: scale(70%);
+    }
+  }
+
   height: 600px;
   // background-color: red;
   &__notFound {
