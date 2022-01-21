@@ -121,9 +121,11 @@
   }
 }
 .episodeSection {
-  .Next,
-  .Prev {
-    top: 0;
+  @include tablet {
+    .Next,
+    .Prev {
+      top: 0;
+    }
   }
   @include mobile {
     .Next,
