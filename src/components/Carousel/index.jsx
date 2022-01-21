@@ -80,10 +80,9 @@ function Carousel(props) {
                           : "notDetails"
                       }
                       title={
-                        carouselType === "carouselSection" ||
-                        carouselType === "episodeSection"
-                          ? elem.name || `Tập ${index + 1}`
-                          : null
+                        (carouselType === "carouselSection" && elem.name) ||
+                        (carouselType === "episodeSection" &&
+                          `Tập ${index + 1}`)
                       }
                       customCard={
                         carouselType === "episodeSection" && "episodeCard"

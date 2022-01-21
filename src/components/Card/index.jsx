@@ -12,7 +12,7 @@ function Card(props) {
   let basePath;
   const aniId = useSelector(aniIdDetails);
 
-  // console.log(">>>>>>. ", aniId);
+  // console.log(">>>>>>. ", title);
 
   if (customCard === "episodeCard") {
     basePath = `/${playerPagePath}`;
@@ -40,7 +40,9 @@ function Card(props) {
         <Button type={"Play"} />
       </div>
       {typeCard === "details" ? (
-        <div className="cardContainer__details">{title}</div>
+        <div className="cardContainer__details d-flex justify-content-center align-items-center">
+          {title}
+        </div>
       ) : null}
     </Link>
   );

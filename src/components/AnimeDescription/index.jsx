@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function AnimeDescription(props) {
   const { data, episode } = props;
 
-  console.log("AnimeDescription >> ", data);
+  // console.log("AnimeDescription >> ", data);
 
   //handle CSS
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function AnimeDescription(props) {
 
   return (
     <div className="animeDescription position-relative d-flex flex-column justify-content-end">
-      {console.log(data)}
+      {/* {console.log(data)} */}
       <div className="animeDescription__wrapper d-flex flex-column justify-content-start">
         <div className="animeDescription__wrapper__control d-flex">
           <Link
