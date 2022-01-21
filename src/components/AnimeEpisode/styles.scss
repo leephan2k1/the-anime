@@ -7,11 +7,14 @@
     margin-top: 8rem;
   }
   @include mobile {
-    margin-top: 8rem;
+    margin-top: 12rem;
   }
   @include tablet {
     .cardWrapper {
       transform: scale(70%);
+    }
+    .Next .Prev {
+      top: -10%;
     }
   }
 
