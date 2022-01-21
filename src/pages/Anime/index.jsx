@@ -1,12 +1,15 @@
 import ANIAPI from "@mattplays/aniapi";
 import ani from "api/ani";
 import aniList from "api/aniList";
+
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import AnimeDescription from "components/AnimeDescription";
 import AnimeEpisode from "components/AnimeEpisode";
 import AnimeHeader from "components/AnimeHeader";
 import "./styles.scss";
+import gomenasaiImg from "assets/images/gomenasai.jpg";
 
 import { setAniId, setAniSlug } from "app/aniSlice";
 import { useDispatch } from "react-redux";
@@ -16,6 +19,7 @@ export default function Anime() {
   const [animeDetails, setAnimeDetails] = useState({});
   let { animeId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //Call API
   useEffect(() => {
@@ -23,14 +27,13 @@ export default function Anime() {
       try {
         animeId = animeId.toLowerCase().replace(/\s+/g, "-");
         const response = await ani.getDetails(animeId);
-        // console.log(response.data);
         if (response.success) {
           dispatch(setAniId(response.data?.id));
           dispatch(setAniSlug(response.data?.slug));
           setAnimeDetails(response.data);
         } else {
           const response = await aniList.getList(animeId);
-          if (response.success) {
+          if (response.success && response.data.length) {
             const responseDetails = await ani.getDetails(
               response.data[0]?.slug
             );
@@ -51,11 +54,39 @@ export default function Anime() {
     return () => {};
   }, []);
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="Anime-detail w-full d-flex flex-column">
-      <AnimeHeader data={animeDetails} />
-      <AnimeDescription data={animeDetails} />
-      <AnimeEpisode data={animeDetails} thumbnail={animeDetails?.thumbnail} />
+      {animeDetails !== "Anime not found!" ? (
+        <>
+          <AnimeHeader data={animeDetails} />
+          <AnimeDescription data={animeDetails} />
+          <AnimeEpisode
+            data={animeDetails}
+            thumbnail={animeDetails?.thumbnail}
+          />
+        </>
+      ) : (
+        <>
+          {" "}
+          <p className="Anime-detail__message">
+            Anime bạn muốn xem chưa có sub hoặc chưa được phát sóng, sin lũi -
+            ごめんなさい!
+          </p>
+          <img
+            className="Anime-detail__notFound"
+            src={gomenasaiImg}
+            alt="gomenasai"
+          ></img>
+          <div className="Anime-detail__back">
+            <p>Quay lại tiếp tục cày bộ khác nào!</p>
+            <i className="fas fa-arrow-left" onClick={handleBack}></i>
+          </div>
+        </>
+      )}
     </div>
   );
 }

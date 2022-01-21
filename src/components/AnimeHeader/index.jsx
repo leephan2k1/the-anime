@@ -35,7 +35,7 @@ function AnimeHeader(props) {
 
   return (
     <header className="animeHeader w-full">
-      {data.id ? (
+      {data?.id ? (
         <Box
           classNames={{
             wrapperClassName: "animeHeader__card overflow-hidden",

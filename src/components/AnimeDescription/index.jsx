@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import ContentLoader from "react-content-loader";
-// import Box from "../Box";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
@@ -37,11 +36,10 @@ export default function AnimeDescription(props) {
 
   return (
     <div className="animeDescription position-relative d-flex flex-column justify-content-end">
-      {/* {console.log(data)} */}
       <div className="animeDescription__wrapper d-flex flex-column justify-content-start">
         <div className="animeDescription__wrapper__control d-flex">
           <Link
-            to={`/anime/watch/${data.id}?index=0`}
+            to={`/anime/watch/${data?.id}?index=0`}
             className="animeDescription__wrapper__control__playBtn d-flex justify-content-center align-items-center"
           >
             <i className="bi bi-play-fill"></i>
@@ -50,7 +48,7 @@ export default function AnimeDescription(props) {
             </span>
           </Link>
           <Link
-            to={`/anime/watch/${data.id}?index=${data.episodes?.length - 1}`}
+            to={`/anime/watch/${data?.id}?index=${data.episodes?.length - 1}`}
             className="animeDescription__wrapper__control__playBtn d-flex justify-content-center align-items-center"
           >
             <i className="bi bi-play-fill"></i>

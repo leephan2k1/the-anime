@@ -1,4 +1,29 @@
 .Anime-detail {
-  height: 100%;
-  // background-color: tomato;
+  // height: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__message {
+    text-align: center;
+    width: 70%;
+    color: #fff;
+    font-size: 1.8rem;
+  }
+  &__notFound {
+    width: 40%;
+  }
+  &__back {
+    text-align: center;
+    color: #fff;
+    font-size: 1.8rem;
+
+    .fa-arrow-left {
+      font-size: 3rem;
+      cursor: pointer;
+      &:hover {
+        transform: scale(120%);
+      }
+    }
+  }
 }
