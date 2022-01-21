@@ -80,13 +80,13 @@ export default function DropDown(props) {
   return (
     <Dropdown data-id={id} toggle={handleToggleItems} isOpen={toggleValue}>
       {/* {console.log(id, " - ", caretTitle)} */}
-      <DropdownToggle caret>{caretTitle}</DropdownToggle>
+      <DropdownToggle caret>{caretTitle || title}</DropdownToggle>
       <DropdownMenu>
         {listItem &&
           listItem.map((e, idx) => {
             return (
               <DropdownItem onClick={handleClickItem} key={idx}>
-                {e}
+                {e?.full_name || e}
               </DropdownItem>
             );
           })}

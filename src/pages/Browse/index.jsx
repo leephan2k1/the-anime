@@ -157,7 +157,7 @@ function Browse() {
             <i className="bi bi-search d-flex align-items-center justify-content-center"></i>
           </div>
         </Row>
-
+        {/* filters  */}
         <Row>
           {data &&
             data.map((elem, index) => {

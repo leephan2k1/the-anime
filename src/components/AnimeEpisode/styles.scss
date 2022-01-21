@@ -28,4 +28,23 @@
     color: #fff;
     font-size: 2rem;
   }
+  &__episodes {
+    width: fit-content;
+    .dropdown {
+      position: relative;
+    }
+    .dropdown > button {
+      width: 150px;
+      height: 50px;
+    }
+    .dropdown > .dropdown-menu {
+      z-index: 999999;
+      width: fit-content;
+      font-size: 1.5rem;
+      position: absolute !important;
+      left: 50% !important;
+      top: 101% !important;
+      transform: translateX(-50%) !important;
+    }
+  }
 }
