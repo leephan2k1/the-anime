@@ -12,7 +12,7 @@ function Card(props) {
   let basePath;
   const aniId = useSelector(aniIdDetails);
 
-  // console.log(slug);
+  // console.log(">>>>>>. ", aniId);
 
   if (customCard === "episodeCard") {
     basePath = `/${playerPagePath}`;

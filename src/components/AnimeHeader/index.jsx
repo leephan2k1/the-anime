@@ -16,7 +16,7 @@ function AnimeHeader(props) {
     const setImage = () => {
       if (data.episodes) {
         setBannerImgURL(() => {
-          return data.episodes[0].thumbnail_small || defaultImage;
+          return data.episodes[0]?.thumbnail_small || defaultImage;
         });
       }
       const animeHeaderDOM = document.querySelector(".animeHeader");

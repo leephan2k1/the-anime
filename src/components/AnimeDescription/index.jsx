@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 export default function AnimeDescription(props) {
   const { data, episode } = props;
 
+  console.log("AnimeDescription >> ", data);
+
   //handle CSS
   useEffect(() => {
     const animeDscWrapperDOM = document.querySelector(
@@ -35,6 +37,7 @@ export default function AnimeDescription(props) {
 
   return (
     <div className="animeDescription position-relative d-flex flex-column justify-content-end">
+      {console.log(data)}
       <div className="animeDescription__wrapper d-flex flex-column justify-content-start">
         <div className="animeDescription__wrapper__control d-flex">
           <Link
@@ -60,13 +63,15 @@ export default function AnimeDescription(props) {
           {data.name ? (
             <>
               <p className="desc__title">{data.name}</p>
-              <p className="desc__title team-sub">
-                {data.subTeams.map((e) => {
-                  return `${e} `;
-                })}
-              </p>
+              {data.episodes ? (
+                <p className="desc__title team-sub">
+                  {data?.subTeams.map((e) => {
+                    return `${e} `;
+                  })}
+                </p>
+              ) : null}
               <div className="desc__title">
-                {data.genres.map((e, idx) => {
+                {data.genres?.map((e, idx) => {
                   if (idx > 4) return;
                   return (
                     <span key={idx} className="desc__genres">

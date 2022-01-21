@@ -42,7 +42,7 @@ export default function Header() {
       debounceTimes.current = setTimeout(async () => {
         try {
           const response = await aniList.getList(searchValues);
-          console.log(response);
+          // console.log(response);
           if (response.success) {
             setResponseList(response.data);
           } else {

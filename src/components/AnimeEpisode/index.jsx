@@ -6,11 +6,11 @@ import gomenasaiImg from "assets/images/gomenasai.jpg";
 export default function AnimeEpisode(props) {
   const { data, thumbnail } = props;
 
-  // console.log("AnimeEpisode data: ", data);
+  console.log("AnimeEpisode data: ", data);
 
   return (
     <section className="animeEpisode w-full d-flex flex-column justify-content-center align-items-center">
-      {data === "Not found episode" ? (
+      {data.episodes?.length === 0 ? (
         <>
           <p className="animeEpisode__message">
             Anime bạn muốn xem chưa có sub, sin lũi - ごめんなさい!

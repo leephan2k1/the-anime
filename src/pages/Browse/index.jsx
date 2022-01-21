@@ -1,4 +1,5 @@
 import ANIAPI from "@mattplays/aniapi";
+import aniList from "api/aniList";
 import data from "./supportData";
 
 import { setFilter } from "app/filtersSlice";
@@ -157,7 +158,6 @@ function Browse() {
           </div>
         </Row>
 
-        {/* filters: năm, mùa, thể loại, trạng thái, định dạng, sắp xếp */}
         <Row>
           {data &&
             data.map((elem, index) => {
@@ -219,7 +219,7 @@ function Browse() {
           }
         >
           <Row>
-            {dataList.length &&
+            {dataList?.length &&
               dataList.map((e) => {
                 return (
                   <Col
@@ -231,7 +231,7 @@ function Browse() {
                     className="card-column d-flex flex-column align-items-center justify-content-center"
                   >
                     <Card
-                      id={e.id}
+                      slug={e.titles?.en}
                       typeCard={"details"}
                       imgSrc={e.cover_image}
                       episode_count={e.episodes_count}

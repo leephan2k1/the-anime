@@ -1,5 +1,6 @@
 import ANIAPI from "@mattplays/aniapi";
 import ani from "api/ani";
+import aniList from "api/aniList";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AnimeDescription from "components/AnimeDescription";
@@ -13,13 +14,14 @@ import { useDispatch } from "react-redux";
 export default function Anime() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const [animeDetails, setAnimeDetails] = useState({});
-  const { animeId } = useParams();
+  let { animeId } = useParams();
   const dispatch = useDispatch();
 
   //Call API
   useEffect(() => {
     const fetchAnime = async () => {
       try {
+        animeId = animeId.toLowerCase().replace(/\s+/g, "-");
         const response = await ani.getDetails(animeId);
         // console.log(response.data);
         if (response.success) {
@@ -27,8 +29,17 @@ export default function Anime() {
           dispatch(setAniSlug(response.data?.slug));
           setAnimeDetails(response.data);
         } else {
-          console.log("not found anime!!");
-          setAnimeDetails("not found anime!!");
+          const response = await aniList.getList(animeId);
+          if (response.success) {
+            const responseDetails = await ani.getDetails(
+              response.data[0]?.slug
+            );
+            dispatch(setAniId(responseDetails.data?.id));
+            dispatch(setAniSlug(responseDetails.data?.slug));
+            setAnimeDetails(responseDetails.data);
+          } else {
+            setAnimeDetails("Anime not found!");
+          }
         }
       } catch (error) {
         console.log("fetch anime failed with error: ", error);

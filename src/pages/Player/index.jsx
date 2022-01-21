@@ -19,7 +19,7 @@ function Player() {
   const animeId = useSelector(aniIdDetails);
   const index = +searchParams.get("index");
 
-  console.log(">>>>>>> ", animeId);
+  // console.log(">>>>>>> ", animeId);
   //call api
   useEffect(() => {
     const fetchEpisode = async () => {
@@ -31,7 +31,7 @@ function Player() {
         // console.log(responseEpisode);
         if (responseEpisode.success) {
           const url = responseEpisode.data.videoSource;
-          console.log(url);
+          // console.log(url);
           setAniUrl({
             type: "video",
             sources: [
@@ -41,19 +41,18 @@ function Player() {
               },
             ],
           });
+        } else {
+          console.log("not found episode anime!!");
+          setAniUrl({
+            type: "video",
+            sources: [
+              {
+                src: "wBamxCpvkGU",
+                provider: "youtube",
+              },
+            ],
+          });
         }
-        // else {
-        //   console.log("not found episode anime!!");
-        //   setAniUrl({
-        //     type: "video",
-        //     sources: [
-        //       {
-        //         src: "wBamxCpvkGU",
-        //         provider: "youtube",
-        //       },
-        //     ],
-        //   });
-        // }
       } catch (err) {
         console.log("fetch api fail error >>> ", err);
       }
