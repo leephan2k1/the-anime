@@ -56,7 +56,7 @@ function App() {
       .onAuthStateChanged(async (user) => {
         if (!user) {
           //user logout
-          console.log("User not log in");
+          // console.log("User not log in");
           return;
         }
 

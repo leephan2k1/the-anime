@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import ANIAPI from "@mattplays/aniapi";
+import aniList from "api/aniList";
 import { remainMiddleElem } from "app/selectors";
 import MyLoader from "../MyLoader";
 import { headerLoaderSettings } from "settings";
@@ -40,16 +41,10 @@ export default function Header() {
       // console.log(searchValues);
       debounceTimes.current = setTimeout(async () => {
         try {
-          const response = await API.Anime.Get(
-            {
-              title: searchValues,
-            },
-            1,
-            10
-          );
-          // console.log(response);
-          if (response.status_code === 200) {
-            setResponseList(response.data.documents);
+          const response = await aniList.getList(searchValues);
+          console.log(response);
+          if (response.success) {
+            setResponseList(response.data);
           } else {
             setResponseList([]);
           }
@@ -135,10 +130,10 @@ export default function Header() {
                   return (
                     <Link
                       className="searchAnime__responseZone__item"
-                      to={`/anime/details/${e.id}`}
+                      to={`/anime/details/${e.slug}`}
                       key={e.id}
                     >
-                      {e.titles.en}
+                      {e.name}
                     </Link>
                   );
                 })}
