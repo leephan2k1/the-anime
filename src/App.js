@@ -88,22 +88,16 @@ function App() {
         }
         dispatch(addList(slideData));
 
-        const dataFilter = await ani.getRecently();
+        const recentlyList = await aniList.getRecently();
         //store to state
-        if (dataFilter.success) {
-          setNewAniList(dataFilter.data);
+        if (recentlyList.success) {
+          setNewAniList(recentlyList.data);
         }
-        const dataSuggest = await API.Anime.Get(
-          {
-            genres: ["Action", "Adventure", "Comedy"],
-            year: 2021,
-            status: [ANIAPI.ENUMS.AnimeStatus.FINISHED],
-          },
-          1,
-          10
-        );
+        const recommendedList = await aniList.getRecommended();
         //store to state
-        setSuggestList(dataSuggest.data.documents);
+        if (recommendedList.success) {
+          setSuggestList(recommendedList.data);
+        }
 
         const springSeason = await API.Anime.Get(
           { year: 2021, season: 1 },

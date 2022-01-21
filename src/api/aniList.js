@@ -14,6 +14,11 @@ const aniList = {
     const url = `/recently`;
     return axiosClient.get(url);
   },
+
+  getRecommended: () => {
+    const url = `/recommended`;
+    return axiosClient.get(url);
+  },
 };
 
 export default aniList;

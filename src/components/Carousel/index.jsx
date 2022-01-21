@@ -82,7 +82,7 @@ function Carousel(props) {
                       title={
                         carouselType === "carouselSection" ||
                         carouselType === "episodeSection"
-                          ? elem.titles?.en || `Tập ${index + 1}`
+                          ? elem.name || `Tập ${index + 1}`
                           : null
                       }
                       customCard={
