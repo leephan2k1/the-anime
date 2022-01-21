@@ -11,7 +11,7 @@ import AnimeHeader from "components/AnimeHeader";
 import "./styles.scss";
 import gomenasaiImg from "assets/images/gomenasai.jpg";
 
-import { setAniId, setAniSlug } from "app/aniSlice";
+import { setAniId, setAniSlug, setEpisodes } from "app/aniSlice";
 import { useDispatch } from "react-redux";
 
 export default function Anime() {
@@ -30,6 +30,7 @@ export default function Anime() {
         if (response.success) {
           dispatch(setAniId(response.data?.id));
           dispatch(setAniSlug(response.data?.slug));
+          dispatch(setEpisodes(response.data?.episodes));
           setAnimeDetails(response.data);
         } else {
           const response = await aniList.getList(animeId);

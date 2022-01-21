@@ -64,7 +64,7 @@ export default function DropDown(props) {
         //dropdown select episode
         navigate(
           `/${playerPagePath}/${aniId}/?index=${
-            +e.target.innerText.charAt(4) - 1
+            +e.target.innerText.slice(4, 6) - 1
           }`
         );
       // console.log("error dispatch");

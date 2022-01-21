@@ -6,6 +6,7 @@ export const seasonBannerList = (state) => state.homeList.seasonsBannerList;
 export const filter = (state) => state.filters.filter;
 export const aniIdDetails = (state) => state.aniDetails.id;
 export const aniSlugDetails = (state) => state.aniDetails.slug;
+export const aniEpisodesDetails = (state) => state.aniDetails.episodes;
 
 export const remainMiddleElem = createSelector(
   homeList,

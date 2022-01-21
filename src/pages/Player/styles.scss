@@ -19,4 +19,21 @@
   .plyr {
     width: 100vw;
   }
+
+  &__episodes {
+    display: none;
+    position: absolute;
+    left: 10rem;
+    top: 3rem;
+    z-index: 1000;
+    .dropdown > button {
+      width: fit-content;
+      height: 40px;
+    }
+    .dropdown > .dropdown-menu {
+      font-size: 2rem;
+      height: 300px;
+      overflow-y: auto;
+    }
+  }
 }

@@ -6,8 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "./styles.scss";
 
+import DropDown from "components/DropDown";
+
 import { useSelector } from "react-redux";
-import { aniSlugDetails, aniIdDetails } from "app/selectors";
+import {
+  aniSlugDetails,
+  aniIdDetails,
+  aniEpisodesDetails,
+} from "app/selectors";
 
 function Player() {
   const [searchParams] = useSearchParams();
@@ -17,9 +23,9 @@ function Player() {
   const API = new ANIAPI.API("DUMMY_JWT");
   const aniSlug = useSelector(aniSlugDetails);
   const animeId = useSelector(aniIdDetails);
+  const aniEpisodes = useSelector(aniEpisodesDetails);
   const index = +searchParams.get("index");
 
-  // console.log(">>>>>>> ", animeId);
   //call api
   useEffect(() => {
     const fetchEpisode = async () => {
@@ -59,7 +65,7 @@ function Player() {
     };
 
     fetchEpisode();
-  }, []);
+  }, [index]);
 
   //css Effect back button
   useEffect(() => {
@@ -67,13 +73,16 @@ function Player() {
     const backBtnDOM = document.querySelector(
       ".animeZonePlayer .bi-arrow-left"
     );
+    const episodeDOM = document.querySelector(".animeZonePlayer__episodes");
     const handleEvent = () => {
       backBtnDOM.style.cssText = "display: block";
+      episodeDOM.style.cssText = "display: block";
       if (timeOutBackBtn.current) {
         clearTimeout(timeOutBackBtn.current);
       }
       timeOutBackBtn.current = setTimeout(() => {
         backBtnDOM.style.cssText = "display: none";
+        episodeDOM.style.cssText = "display: none";
       }, 2000);
     };
     playerDOM.addEventListener("mousemove", handleEvent);
@@ -91,6 +100,9 @@ function Player() {
         }}
         className="bi bi-arrow-left"
       ></i>
+      <div className="animeZonePlayer__episodes">
+        <DropDown title={"Chọn tập"} listItem={aniEpisodes} />
+      </div>
       <Plyr
         source={aniUrl}
         options={{
