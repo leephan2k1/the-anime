@@ -6,11 +6,17 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import { seasons } from "constants/season";
+import { useNavigate } from "react-router-dom";
+import { playerPagePath } from "constants/path";
+import { useSelector } from "react-redux";
+import { aniIdDetails } from "app/selectors";
 
 export default function DropDown(props) {
   const { title, listItem, id, triggerFunction, filterFromRedux } = props;
   const [toggleValue, setToggleValue] = useState(false);
   const [caretTitle, setCaretTitle] = useState(title);
+  const navigate = useNavigate();
+  const aniId = useSelector(aniIdDetails);
 
   // console.log(seasons[filterFromRedux]);
 
@@ -55,6 +61,12 @@ export default function DropDown(props) {
         triggerFunction("sort", e.target.innerText);
         break;
       default:
+        //dropdown select episode
+        navigate(
+          `/${playerPagePath}/${aniId}/?index=${
+            +e.target.innerText.charAt(4) - 1
+          }`
+        );
         console.log("error dispatch");
     }
   };
