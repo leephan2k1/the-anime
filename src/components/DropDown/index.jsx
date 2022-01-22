@@ -73,10 +73,13 @@ export default function DropDown(props) {
 
   //sync filter from homepage
   useEffect(() => {
-    if (filterFromRedux) {
+    if (filterFromRedux != null) {
       switch (id) {
         case 1:
-          if (seasons[filterFromRedux]) setCaretTitle(seasons[filterFromRedux]);
+          if (seasons[filterFromRedux] !== null) {
+            console.log(seasons[filterFromRedux]);
+            setCaretTitle(seasons[filterFromRedux]);
+          }
           break;
         case 2:
           if (isNaN(filterFromRedux)) {
