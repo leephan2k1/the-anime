@@ -14,9 +14,9 @@ function SectionAnime(props) {
       sectionCarouselSettings.infinite = false;
       sectionCarouselSettings.speed = 150;
       sectionCarouselSettings.responsive[0] = {
-        breakpoint: 1024,
+        breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 3,
           infinite: true,
           dots: false,
@@ -25,7 +25,7 @@ function SectionAnime(props) {
     }
     return () => {
       sectionCarouselSettings.responsive[0] = {
-        breakpoint: 1024,
+        breakpoint: 480,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,

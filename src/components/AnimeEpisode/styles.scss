@@ -9,9 +9,9 @@
   }
 
   @include tablet {
-    .cardWrapper {
-      transform: scale(70%);
-    }
+    // .cardWrapper {
+    //   transform: scale(70%);
+    // }
   }
 
   height: 600px;
@@ -38,7 +38,8 @@
     .dropdown > .dropdown-menu {
       z-index: 999999;
       width: fit-content;
-      height: 300px;
+      height: fit-content;
+      max-height: 300px;
       overflow-y: auto;
       font-size: 1.5rem;
       position: absolute !important;

@@ -124,13 +124,13 @@
   @include tablet {
     .Next,
     .Prev {
-      top: 0;
+      top: -25%;
     }
   }
   @include mobile {
     .Next,
     .Prev {
-      top: -20%;
+      top: -11%;
     }
   }
 }
