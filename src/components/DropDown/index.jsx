@@ -77,7 +77,6 @@ export default function DropDown(props) {
       switch (id) {
         case 1:
           if (seasons[filterFromRedux] !== null) {
-            console.log(seasons[filterFromRedux]);
             setCaretTitle(seasons[filterFromRedux]);
           }
           break;
